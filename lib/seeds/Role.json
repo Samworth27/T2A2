@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "admin",
+    "resource_type": null,
+    "resource_id": null
+  },
+  {
+    "id": 2,
+    "name": "trader",
+    "resource_type": null,
+    "resource_id": null
+  },
+  {
+    "id": 3,
+    "name": "moderator",
+    "resource_type": null,
+    "resource_id": null
+  }
+]

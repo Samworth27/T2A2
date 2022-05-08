@@ -78,6 +78,11 @@ GEM
       momentjs-rails (~> 2.8)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
+    appmap (0.83.1)
+      activesupport
+      method_source
+      rack
+      reverse_markdown
     bcrypt (3.1.17)
     bindex (0.8.1)
     bootsnap (1.11.1)
@@ -213,6 +218,8 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    reverse_markdown (2.1.1)
+      nokogiri
     rexml (3.2.5)
     rolify (6.0.0)
     rubyzip (2.3.2)
@@ -270,6 +277,7 @@ PLATFORMS
 
 DEPENDENCIES
   administrate
+  appmap
   bootsnap
   capybara
   cssbundling-rails

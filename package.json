@@ -11,7 +11,8 @@
     "jquery": "^3.6.0",
     "mdb-ui-kit": "^4.0.0",
     "node": "^17.7.2",
-    "sass": "^1.51.0"
+    "sass": "^1.51.0",
+    "yarn": "^1.22.18"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",

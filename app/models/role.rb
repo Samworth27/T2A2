@@ -11,4 +11,14 @@ class Role < ApplicationRecord
             :allow_nil => true
 
   scopify
+
+  def export
+    values = %i[id name resource_type resource_id]
+    data = {}
+    values.each do |v|
+      data[v] = self.send(v)
+    end
+    data
+  end
+
 end
