@@ -1,7 +1,7 @@
 namespace :export do
   desc "Export users" 
   task :export_to_seeds => :environment do
-    
+
     tables = [User, Role, UsersRole]
 
     tables.each do |table|
