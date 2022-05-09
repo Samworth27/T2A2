@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   rolify
   # Include default devise modules. Others available are:
@@ -8,11 +10,6 @@ class User < ApplicationRecord
 
 
   def export
-    values = %i[email encrypted_password]
-    data = {}
-    values.each do |v|
-      data[v] = self.send(v)
-    end
-    data
+    super(%i[email encrypted_password])
   end
 end
