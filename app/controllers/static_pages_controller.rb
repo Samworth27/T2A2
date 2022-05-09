@@ -3,10 +3,13 @@ class StaticPagesController < ApplicationController
   def index
   end
   def trader
+    authorize :static_page, :trader?
   end
   def moderator
+    authorize :static_page, :moderator?
   end
   def admin
+    authorize :static_page, :admin?
   end
   def new
 
