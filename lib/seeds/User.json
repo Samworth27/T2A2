@@ -4,11 +4,11 @@
     "encrypted_password": "$2a$12$kljjiHciDtsSDqTeDmNsgu7LIBkvhJv0z90xHXVAzJyOLXO9mEQd."
   },
   {
-    "email": "trader@localhost",
-    "encrypted_password": "$2a$12$e2760b5sXDcmv5UUIoxu7e9gTSr19hUU9mrfJAa2aWCaNsHle8Bim"
-  },
-  {
     "email": "admin@localhost",
     "encrypted_password": "$2a$12$s.KSuFG7ZBUreV.1.vimeOXcFwLUnXrCZo4ZWeya64ibYxZ99pKHS"
+  },
+  {
+    "email": "trader@localhost",
+    "encrypted_password": "$2a$12$e2760b5sXDcmv5UUIoxu7e9gTSr19hUU9mrfJAa2aWCaNsHle8Bim"
   }
 ]

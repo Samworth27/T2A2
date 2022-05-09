@@ -1,0 +1,12 @@
+[
+  {
+    "id": 2,
+    "key": "oorbm56wm0gcfuuahjw0cxucdz1d",
+    "filename": "IMG_20211205_203656.jpg",
+    "content_type": "image/jpeg",
+    "metadata": "{\"identified\":true,\"analyzed\":true}",
+    "service_name": "cloudinary",
+    "byte_size": 110603,
+    "checksum": "1TElqbjRNfeoV9HGJycLWQ=="
+  }
+]
