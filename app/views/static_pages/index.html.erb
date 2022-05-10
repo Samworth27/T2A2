@@ -1,1 +1,4 @@
-<%= user_signed_in? %>
+<h1>This is the Index page</h1>
+<%if user_signed_in? %>
+  User signed and has the roles <%= current_user.roles.map{|role| role.name}%>
+<% end%>
