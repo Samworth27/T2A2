@@ -85,3 +85,5 @@ gem "administrate"
 gem "file_validators", "~> 3.0"
 
 gem "cloudinary", "~> 1.23"
+
+gem "friendly_id", "~> 5.4"

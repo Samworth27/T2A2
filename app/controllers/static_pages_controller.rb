@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   def index
+    @category = Category.first
   end
   def trader
     authorize :static_page, :trader?

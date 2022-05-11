@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Fresh Produce",
+    "children": [
+      {
+        "name": "Fruit",
+        "children": []
+      },
+      {
+        "name": "Vegetables",
+        "children": []
+      },
+      {
+        "name": "Nuts",
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Raw Animal Products",
+    "children": [
+      {
+        "name": "Meats",
+        "children": [
+          {
+            "name": "Beef/ Veal",
+            "children": []
+          },
+          {
+            "name": "Pork",
+            "children": []
+          },
+          {
+            "name": "Lamb/ Mutton",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Milk",
+        "children": []
+      },
+      {
+        "name": "Eggs",
+        "children": []
+      },
+      {
+        "name": "Bee Products",
+        "children": []
+      },
+      {
+        "name": "Seafood",
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Artisanal Goods",
+    "children": [
+      {
+        "name": "Dairy Products",
+        "children": []
+      },
+      {
+        "name": "Jams and Preserves",
+        "children": []
+      },
+      {
+        "name": "Dried, Cured or Smoked Meats",
+        "children": []
+      }
+    ]
+  }
+]

@@ -39,6 +39,17 @@
               <li class="nav-item">
                 <%= link_to 'Admin', admin_path, class:"nav-link #{active_class(admin_path)}"%>
               </li>
+            
+              <li class="nav-item dropdown has-megamenu">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> Mega menu  </a>
+                <div class="dropdown-menu megamenu" role="menu">
+                  This is content of megamenu. <br>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                </div> <!-- dropdown-mega-menu.// -->
+              </li>
             </ul>
 
             <% if user_signed_in? %>
@@ -117,14 +128,34 @@
     <%# </div> %>
   </header>
 
-  <!-- Flash Notice for Rails notifications -->
+
 
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <div class="container-fluid">
-      <%= yield %>
-    </div>  
+      <div class="row flex-nowrap">
+
+        <!-- Sidebar -->
+        <% unless @category.nil?%>
+          <div class="col-auto col-md3 col-xl-2 px-sm-2 px-0 bg-dark text-light">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+              <h4><%= @category.grandparent %></h4>
+              <%= nested_sidebar_nav(@category) %>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Content -->
+        <div class="col-auto">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+
+
+
   </body>
 </html>
