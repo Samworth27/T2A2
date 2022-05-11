@@ -6,6 +6,7 @@ class Category < ApplicationRecord
   friendly_id :name, use: :slugged
   has_many :children, foreign_key: :category_id, class_name: 'Category'
   belongs_to :parent, foreign_key: :category_id, class_name: 'Category'
+  has_many :items, foreign_key: :category_id, class_name: 'Item'
 
   def to_s
     display
