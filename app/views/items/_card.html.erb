@@ -6,7 +6,7 @@
     </div>
     <div class="card-content">
       <ul class="list-group list-group-flush">
-
+    
         <% display_attributes.each do |attribute| %>
           <li class="list-group-item">
             <h4> <%= attribute[:label]%> </h4>
@@ -29,7 +29,7 @@
 
       <% if edit == true %>     
         <%= link_to "Edit this #{item.class}", edit_polymorphic_path(item), class: 'btn btn-outline-primary' %>
-        <%= link_to "Back to #{item.class}s", polymorphic_path(item.class), class: 'btn btn-outline-primary' %>
+        <%# <%= link_to "Back to #{item.class}s", polymorphic_path(item.class), class: 'btn btn-outline-primary' %> %>
         <%= link_to "Destroy this #{item.class}", polymorphic_path(item), data: { turbo_method: :delete }, class:'btn btn-outline-primary' %>
       <% else %>
         <%= link_to "Show this #{item.class}", item_path(@category, item), class:'btn btn-outline-primary' %>

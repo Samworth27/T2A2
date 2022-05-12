@@ -26,14 +26,15 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-
   # category Sidebar Suite
 
   def nested_sidebar_nav(item)
-    return list_of_siblings(item) if item.parent.root?
-
-    list_of_parents_siblings(item)
+    item.parent.root? ? list_of_siblings(item) : list_of_parents_siblings(item)
+    # return list_of_siblings(item) if item.parent.root?
+    
+    # list_of_parents_siblings(item)
   end
+
 
   def list_of_children(item)
     return if item.children.size.zero?
@@ -71,3 +72,4 @@ module ApplicationHelper
     end
   end
 end
+

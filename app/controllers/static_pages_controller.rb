@@ -21,7 +21,7 @@ class StaticPagesController < ApplicationController
     #if book.valid?
       #redirect_to book
     #else
-      #flash.now[:alert] = book.errors.full_messages.join('<br>)
+      #flash.now[:alert] = book.errors.full_messages.join('<br>')
       # render 'new'
     #end
   end

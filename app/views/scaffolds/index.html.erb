@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Scaffolds</h1>
+
+<div id="scaffolds">
+  <% @scaffolds.each do |scaffold| %>
+    <%= render scaffold %>
+    <p>
+      <%= link_to "Show this scaffold", scaffold %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New scaffold", new_scaffold_path %>

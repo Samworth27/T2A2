@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Apple",
+    "plural": "Apples",
+    "category" : "fruit"
+  },
+  {
+    "name": "Banana",
+    "plural": "Bananas",
+    "category": "fruit"
+  },
+  {
+    "name": "Carrot",
+    "plural": "Carrots",
+    "category": "vegetables"
+  },
+  {
+    "name": "Corn",
+    "plural": "Corn",
+    "category": "vegetables"
+  },
+  {
+    "name": "Lemon",
+    "plural": "Lemons",
+    "category": "fruit"
+  },
+  {
+    "name": "Lime",
+    "plural": "Limes",
+    "category": "fruit"
+  },
+  {
+    "name": "Mango",
+    "plural": "Mangoes",
+    "category": "fruit"
+  },
+  {
+    "name": "Onion",
+    "plural": "Onions",
+    "category": "vegetables"
+  },
+  {
+    "name": "Orange",
+    "plural": "Oranges",
+    "category": "fruit"
+  },
+  {
+    "name": "Potato",
+    "plural": "Potatoes",
+    "category": "vegetables"
+  },
+  {
+    "name": "Pumpkin",
+    "plural": "Pumpkins",
+    "category": "vegetables"
+  },
+  {
+    "name": "Tomato",
+    "plural": "Tomatoes",
+    "category": "vegetables"
+  }
+]

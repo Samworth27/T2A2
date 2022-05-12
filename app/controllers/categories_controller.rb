@@ -8,6 +8,6 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.friendly.find(params[:id])
-    @items = @category.items
+    @items = @category.all_descendants.collect(&:items).flatten.sort
   end
 end

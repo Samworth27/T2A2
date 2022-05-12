@@ -1,6 +1,5 @@
 <h1><%= @category %></h1>
 
-
 <% @items.each do |item| %>
-  <%= render partial:'items/card', locals: {item: item, edit: false, display_attributes: []} %>
+  <%= render partial:'items/card', locals: {item: item, edit: true, display_attributes: []} %>
 <% end %>

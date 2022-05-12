@@ -7,7 +7,7 @@ class Category < ApplicationRecord
 
   has_many :children, foreign_key: :category_id, class_name: 'Category'
   belongs_to :parent, foreign_key: :category_id, class_name: 'Category'
-  has_many :items, foreign_key: :category_id, class_name: 'Item'
+  has_many :items, foreign_key: :category_id, class_name: 'Item', dependent: :destroy
 
   def to_s
     display
@@ -33,6 +33,14 @@ class Category < ApplicationRecord
       node = node.parent
       return path if node == node.parent
     end
+  end
+
+  def all_descendants
+    descendants = [self]
+    children.each do |child|
+      descendants.append(child.all_descendants)
+    end
+    descendants.flatten
   end
 
   def tree(max_depth = 1000)

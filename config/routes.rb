@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :scaffolds
 
   get 'categories/index'
   get 'categories/show'
@@ -19,8 +20,9 @@ Rails.application.routes.draw do
   get '/moderator', to: 'static_pages#moderator', as: :moderator
   get '/admin', to: 'static_pages#admin', as: :admin
 
-
-  get 'catergories/:cat_id/:id', to: 'items#show', as: :item
+  get '/admin/edit/item/:id', to: 'items#edit', as: :edit_item
+  patch '/admin/edit/item/:id', to: 'items#update'
+  get '/categories/:cat_id/:id', to: 'items#show', as: :item
 
   root 'static_pages#index'
 end
