@@ -1,0 +1,5 @@
+<div class="list-group-item list-group-item-action"><%= link_to @category.grandparent %></div>
+
+<%= nested_sidebar_nav(@category,tag_type:{branch: :div, leaf: :div}, tag_class:{branch:'', leaf: 'list-group-item list-group-item-action list-group-item-light p-3'}) %>
+
+<%#  %>
