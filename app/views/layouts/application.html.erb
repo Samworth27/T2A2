@@ -24,7 +24,7 @@
       <main style="{flex: 1 0 auto;}">
         <div class="row">
           <div class="col-12 col-lg-3 bg-warning px-0">
-            <%= render '/layouts/sidebar'%>
+            <%= render('/layouts/sidebar') if @category.nil? == false %>
           </div>
           <div class="col-9 bg-success">
             <% flash.each do |key, value| %>

@@ -1,0 +1,22 @@
+<%= form_with(model: item, url: edit_item_path(item)) do |form| %>
+  <% if item.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+        <% item.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= cl_image_tag(item.image.key, width: 200) %>
+  
+  <%= form.label :image %>
+  <%= form.file_field :image %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+<%# <%= cloudinary_js_config %> %>

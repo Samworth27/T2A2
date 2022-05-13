@@ -1,32 +1,42 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'listing/index'
-  get 'listing/show'
-  get 'listing/edit'
-  get 'listing/create'
-  resources :scaffolds
 
-  get 'categories/index'
-  get 'categories/show'
+  namespace :admin do
+    resources :categories
+    resources :listings
+    resources :active_storage_blobs
+    resources :items
+    resources :active_storage_attachments
+    resources :scaffolds
+    resources :quantity_types
+    resources :roles
+    resources :users
+    root to: 'categories#index'
+  end
+
+  namespace :trader do
+    resources :listings
+    root to: 'listings#index'
+  end
+
+  scope '/view' do
+    get '/categories/root', to: redirect('view/categories')
+    get '/categories/:id', to: 'categories#show', as: :category
+    get '/categories/:cat_id/:id', to: 'items#show', as: :item
+    resources :categories
+    resources :items
+    resources :listings
+
+    root to: 'categories#index', as: :view
+  end
+
+  # resources :scaffolds
 
   devise_for :users, controllers: { registrations: 'user/registrations' }
-  # devise_for :users
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  get '/', to: 'categories#index', as: :home
-  get '/categories/root', to: redirect('/')
-  get '/categories/:id', to: 'categories#show', as: :category
-
-  get '/trader', to: 'static_pages#trader', as: :trader
-  get '/moderator', to: 'static_pages#moderator', as: :moderator
-  get '/admin', to: 'static_pages#admin', as: :admin
-
-  get '/admin/edit/item/:id', to: 'items#edit', as: :edit_item
-  patch '/admin/edit/item/:id', to: 'items#update'
-  get '/categories/:cat_id/:id', to: 'items#show', as: :item
+  # get '/trader', to: 'static_pages#trader', as: :trader
+  get '/moderator', to: 'static_pages#moderator', as: :moderator_root
 
   root 'static_pages#index'
 end
