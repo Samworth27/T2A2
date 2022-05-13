@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_12_002219) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_13_020026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,7 +75,27 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_12_002219) do
     t.index ["slug"], name: "index_items_on_slug", unique: true
   end
 
+  create_table "listings", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "user_id", null: false
+    t.float "quantity"
+    t.bigint "quantity_type_id", null: false
+    t.date "start_dtg"
+    t.date "finish_dtg"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_listings_on_item_id"
+    t.index ["quantity_type_id"], name: "index_listings_on_quantity_type_id"
+    t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+
   create_table "pages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quantity_types", force: :cascade do |t|
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -129,4 +149,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_12_002219) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "categories", "categories"
   add_foreign_key "items", "categories"
+  add_foreign_key "listings", "items"
+  add_foreign_key "listings", "quantity_types"
+  add_foreign_key "listings", "users"
 end

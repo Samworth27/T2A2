@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item: one
+  user: one
+  quantity: 1.5
+  quantity_type: one
+  start_dtg: 2022-05-13
+  finish_dtg: 2022-05-13
+
+two:
+  item: two
+  user: two
+  quantity: 1.5
+  quantity_type: two
+  start_dtg: 2022-05-13
+  finish_dtg: 2022-05-13

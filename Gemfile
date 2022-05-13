@@ -89,5 +89,3 @@ gem "cloudinary", "~> 1.23"
 gem "friendly_id", "~> 5.4"
 
 gem "net-http", "~> 0.2.2"
-
-gem "erb_lint", "~> 0.1.1"

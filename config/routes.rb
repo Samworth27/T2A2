@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'listing/index'
+  get 'listing/show'
+  get 'listing/edit'
+  get 'listing/create'
   resources :scaffolds
 
   get 'categories/index'

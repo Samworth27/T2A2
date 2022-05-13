@@ -33,7 +33,12 @@ module ApplicationHelper
     tag_type: { branch: :ul, leaf: :li },
     tag_class: { branch: 'branch', leaf: 'leaf' }
   )
-    item.parent.root? ? list_of_siblings(item, tag_type, tag_class) : list_of_parents_siblings(item, tag_type, tag_class)
+    if item.parent.root?
+      list_of_siblings(item, tag_type,
+                       tag_class)
+    else
+      list_of_parents_siblings(item, tag_type, tag_class)
+    end
   end
 
   def list_of_children(item, tag_type, tag_class)
@@ -77,5 +82,11 @@ module ApplicationHelper
       end
     end
   end
-end
 
+  def flash_class(level)
+    { notice: 'alert alert-info',
+      success: 'alert alert-success',
+      error: 'alert alert-danger',
+      alert: 'alert alert-warning' }[level.to_sym]
+  end
+end

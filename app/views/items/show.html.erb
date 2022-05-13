@@ -1,2 +1,6 @@
-<h1>Item#show</h1>
-<p>Find me in app/views/item/show.html.erb</p>
+<h1><%= @item.plural %></h1>
+<div class="row row-cols-1 row-cols-lg-4 g-4">
+  <% @listings.each do |item| %>
+    <%= render partial:'items/card', locals: {item: item, edit: true, display_attributes: []} %>
+  <% end %>
+</div>
