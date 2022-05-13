@@ -1,5 +1,8 @@
-<div class="list-group-item list-group-item-action"><%= link_to @category.grandparent %></div>
-
-<%= nested_sidebar_nav(@category,tag_type:{branch: :div, leaf: :div}, tag_class:{branch:'', leaf: 'list-group-item list-group-item-action list-group-item-light p-3'}) %>
-
-<%#  %>
+<div class="list-group">
+  <% leaf_attr = {tag: :div, class:'leaf list-group-item list-group-item-action list-group-item-primary p-3 px-2'} %>
+  <% branch_attr = {tag: :div, class: 'branch' }%>
+  <%= nested_sidebar_nav(
+    @category,
+    tag_type:{branch: branch_attr[:tag], leaf: leaf_attr[:tag]},
+    tag_class:{branch:branch_attr[:class], leaf:leaf_attr[:class]}) %>
+</div>
