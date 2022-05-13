@@ -91,3 +91,4 @@ gem "friendly_id", "~> 5.4"
 gem "net-http", "~> 0.2.2"
 
 gem "administrate-field-active_storage", "~> 0.4.1"
+gem "ruby-vips", "~> 2.1"

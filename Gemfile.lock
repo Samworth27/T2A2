@@ -339,6 +339,7 @@ DEPENDENCIES
   pundit
   rails (~> 7.0.2, >= 7.0.2.4)
   rolify
+  ruby-vips (~> 2.1)
   selenium-webdriver
   sprockets-rails
   stimulus-rails
