@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class CategoryDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -17,7 +19,7 @@ class CategoryDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     display: Field::String,
-    slug: Field::String,
+    slug: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -30,7 +32,7 @@ class CategoryDashboard < Administrate::BaseDashboard
     name
     parent
     children
-    items 
+    items
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

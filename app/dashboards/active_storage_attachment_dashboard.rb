@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class ActiveStorageAttachmentDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -13,7 +15,7 @@ class ActiveStorageAttachmentDashboard < Administrate::BaseDashboard
     record_type: Field::String,
     record_id: Field::Number,
     blob_id: Field::Number,
-    created_at: Field::DateTime,
+    created_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
