@@ -22,6 +22,7 @@ By default, it renders:
     </title>
     <%= render "stylesheet" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag if defined?(csp_meta_tag) %>
   </head>
@@ -29,21 +30,21 @@ By default, it renders:
     <%= render "icons" %>
     <div class="d-flex flex-column container-fluid">
       <%# Header%>
-      <header class="row navbar navbar-fixed-top bg-dark navbar-dark">
-        <div class="col-3 ">
-          <a class="navbar-brand" href="">Marketplace</a>
-        </div>
-        <nav class="col-9 px-0">
-          <%= render "shared/header" %>
-        </nav>
-      </header>
-      <%# content %>
+      
+          <%= render "/shared/header" %>
+
+
+      
       <div style="{flex: 1 0 auto;}">
         <div class="row">
-          <div class="col-12 col-lg-3 bg-warning px-0">
+
+          <%# Sidebar %>
+          <div class="col-12 col-lg-3 px-0">
             <%= render('navigation')%>
           </div>
-          <div class="col-9 bg-success ">
+
+          <%# content %>
+          <main class="col-9">
             <!--<% flash.each do |key, value| %>
               <div class="<%= flash_class(key) %>">
                 <%= value %><%= key.class %>
@@ -51,9 +52,10 @@ By default, it renders:
             <% end %>-->
             <%= render "flashes" -%>
             <%= yield %>
-          </div>
+          </main>
         </div>
       </div>
+
       <%# footer  %>
       <div class="container">
         <footer class="py-3 my-4">

@@ -12,21 +12,14 @@
   <body>
     <div class="d-flex flex-column container-fluid">
       <%# Header%>
-      <header class="row navbar navbar-fixed-top bg-dark navbar-dark">
-        <div class="col-3 ">
-          <a class="navbar-brand" href="">Marketplace</a>
-        </div>
-        <nav class="col-9 px-0">
-          <%= render "shared/header" %>
-        </nav>
-      </header>
+      <%= render "shared/header" %>
       <%# content %>
       <main style="{flex: 1 0 auto;}">
         <div class="row">
-          <div class="col-12 col-lg-3 bg-warning px-0">
+          <div class="col-12 col-lg-3 px-0">
             <%= render('/shared/sidebar') if @category.nil? == false %>
           </div>
-          <div class="col-9 bg-success">
+          <div class="col-9">
             <% flash.each do |key, value| %>
               <div class="<%= flash_class(key) %>">
                 <%= value %><%= key.class %>

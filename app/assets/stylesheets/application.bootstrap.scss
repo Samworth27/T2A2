@@ -4,8 +4,11 @@
 @import "bootstrap/scss/functions";
 
 // 2. Include any default variable overrides here
+$tom-thumb: #2E4E36;
+$fuel-yellow: #EAA51B;
 
-$primary: #135B13;
+$primary: $tom-thumb;
+$secondary: $fuel-yellow;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "bootstrap/scss/variables";

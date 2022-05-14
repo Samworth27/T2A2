@@ -23,7 +23,7 @@ categories.each do |category|
   node = Category.new(name: category[:name], display: category[:name], parent: root)
   node.save!
   create_children(node, category[:children])
-end if false
+end
 
 items = JSON.parse(File.read(Rails.root.join('db', 'seeds', 'Items.json')), symbolize_names: true)
 items.each do |item|
@@ -32,7 +32,7 @@ items.each do |item|
   row.save!
   row.image.attach(io: File.open(Rails.root.join('public', 'images', "#{item[:name]}.jpg")),
                    filename: "#{item[:name]}.jpg")
-end if false
+end
 
 admin_user = User.new(email: 'admin@localhost', password: 'password')
 admin_user.save!
@@ -46,11 +46,11 @@ trader_user = User.new(email: 'trader@localhost', password: 'password')
 trader_user.save!
 trader_user.add_role(:trader)
 
-parent = root
-5.times do |i|
-  5.times do |j|
-    node = Category.new(name: "level-#{i}:#{j}", display: "level-#{i}:#{j}", parent:)
-    node.save!
-  end
-  parent = Category.last
-end
+# parent = root
+# 5.times do |i|
+#   5.times do |j|
+#     node = Category.new(name: "level-#{i}:#{j}", display: "level-#{i}:#{j}", parent:)
+#     node.save!
+#   end
+#   parent = Category.last
+# end

@@ -1,68 +1,16 @@
-<nav class="navbar navbar-expand-md">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="nav nav-pills me-auto mb-2 mb-lg-0">
-        <%= link_to 'Home', root_path, class:"nav-link #{active_class(root_path)}"%>
-        <%= link_to 'Trader', trader_root_path, class:"nav-link #{active_namespace(trader_root_path)}"%>
-        <%= link_to 'Moderator', moderator_root_path, class:"nav-link #{active_namespace(moderator_root_path)}"%>
-        <%= link_to 'Admin', admin_root_path, class:"nav-link #{active_namespace(admin_root_path)}"%>
-      </div>
-      <% if user_signed_in? %>
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-          <%= current_user.email%>
-        </button>
-        <div class="dropdown-menu dropdown-menu-end">
-          <%# <div class="dropdown-divider"></div> %>
-          <%= link_to 'Edit Profile', edit_user_registration_path,class:'dropdown-item'%>
-          <%= link_to 'Sign Out', destroy_user_session_path, data:{turbo_method: :delete},class:'dropdown-item'%>
-        </div>
-      </div>
-    <% else %>
-      <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-        Log In
-      </button>
-      <div class="dropdown-menu dropdown-menu-end">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name),class:"px-4 py-3") do |f| %>
-          <div class="field dropdown-item">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-          </div>
-          <div class="field dropdown-item">
-            <%= f.label :password %><br />
-            <%= f.password_field :password, autocomplete: "current-password" %>
-          </div>
-          <% if devise_mapping.rememberable? %>
-            <div class="field dropdown-item">
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember_me %>
-            </div>
-          <% end %>
-          <div class="actions dropdown-item">
-            <%= f.submit "Log in" %>
-          </div>
-        <% end %>
-        <div class="dropdown-divider"></div>
-        <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-          <%= link_to "Sign up", new_registration_path(resource_name), class:'dropdown-item' %>
-        <% end %>
-        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-          <%= link_to "Forgot your password?", new_password_path(resource_name), class:'dropdown-item' %>
-        <% end %>
-        <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-          <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class:'dropdown-item' %>
-        <% end %>
-        <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-          <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), class:'dropdown-item' %>
-        <% end %>
-        <%- if devise_mapping.omniauthable? %>
-          <%- resource_class.omniauth_providers.each do |provider| %>
-            <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class:'dropdown-item', method: :post %>
-          <% end %>
-        <% end %>
-      </div>
-    <% end %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<header class="row navbar navbar-dark bg-primary">
+  <div class="col-3 ">
+    <a class="navbar-brand text-secondary" href="">Marketplace</a>
   </div>
-</nav>
+  <nav class="col-9 px-0">
+    <div class="container-fluid">
+      <div class="btn-group" flex-column flex-md-row">
+        <%= link_to 'Home', root_path, class:"btn btn-secondary #{active_class(root_path)}"%>
+        <%= link_to 'Trader', trader_root_path, class:"btn btn-secondary #{active_namespace(trader_root_path)}"%>
+        <%= link_to 'Moderator', moderator_root_path, class:"btn btn-secondary #{active_namespace(moderator_root_path)}"%>
+        <%= link_to 'Admin', admin_root_path, class:"btn btn-secondary #{active_namespace(admin_root_path)}"%>
+        <%= render 'shared/header_user' %>
+      </div>
+    </div>
+  </nav>
+</header>
