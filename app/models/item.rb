@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Item < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged

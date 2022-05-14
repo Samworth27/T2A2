@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Listings
   class ItemsController < ApplicationController
     def show

@@ -50,7 +50,7 @@ module ApplicationHelper
     # tag.send(tag_type[:branch], class: tag_class[:branch]) do
     item.children.collect do |child|
       # concat(tag.send(tag_type[:leaf], class: tag_class[:leaf]) { link_to(">#{child}", child, class:'') })
-      concat(link_to(child.to_s, child, class: tag_class[:leaf] + ' child'))
+      concat(link_to(child.to_s, child, class: "#{tag_class[:leaf]} child"))
     end
     # end
   end
@@ -66,7 +66,7 @@ module ApplicationHelper
         else
           concat(link_to(sibling.to_s, sibling, class: tag_class[:leaf]))
         end
-        next unless sibling == item && item.children.size != 0
+        next unless sibling == item && !item.children.empty?
 
         concat(tag.send(tag_type[:leaf], class: tag_class[:leaf]) do
                  list_of_children(item, tag_type, tag_class, tier_class)

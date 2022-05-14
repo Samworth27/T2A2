@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ScaffoldsController < ApplicationController
   before_action :set_scaffold, only: %i[show edit update destroy]
 
