@@ -1,5 +1,5 @@
 class ScaffoldsController < ApplicationController
-  before_action :set_scaffold, only: %i[ show edit update destroy ]
+  before_action :set_scaffold, only: %i[show edit update destroy]
 
   # GET /scaffolds or /scaffolds.json
   def index
@@ -7,8 +7,7 @@ class ScaffoldsController < ApplicationController
   end
 
   # GET /scaffolds/1 or /scaffolds/1.json
-  def show
-  end
+  def show; end
 
   # GET /scaffolds/new
   def new
@@ -16,8 +15,7 @@ class ScaffoldsController < ApplicationController
   end
 
   # GET /scaffolds/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /scaffolds or /scaffolds.json
   def create
@@ -25,7 +23,7 @@ class ScaffoldsController < ApplicationController
 
     respond_to do |format|
       if @scaffold.save
-        format.html { redirect_to scaffold_url(@scaffold), notice: "Scaffold was successfully created." }
+        format.html { redirect_to scaffold_url(@scaffold), notice: 'Scaffold was successfully created.' }
         format.json { render :show, status: :created, location: @scaffold }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +36,7 @@ class ScaffoldsController < ApplicationController
   def update
     respond_to do |format|
       if @scaffold.update(scaffold_params)
-        format.html { redirect_to scaffold_url(@scaffold), notice: "Scaffold was successfully updated." }
+        format.html { redirect_to scaffold_url(@scaffold), notice: 'Scaffold was successfully updated.' }
         format.json { render :show, status: :ok, location: @scaffold }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +50,20 @@ class ScaffoldsController < ApplicationController
     @scaffold.destroy
 
     respond_to do |format|
-      format.html { redirect_to scaffolds_url, notice: "Scaffold was successfully destroyed." }
+      format.html { redirect_to scaffolds_url, notice: 'Scaffold was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_scaffold
-      @scaffold = Scaffold.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def scaffold_params
-      params.fetch(:scaffold, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_scaffold
+    @scaffold = Scaffold.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def scaffold_params
+    params.fetch(:scaffold, {})
+  end
 end

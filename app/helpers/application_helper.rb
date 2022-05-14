@@ -44,14 +44,14 @@ module ApplicationHelper
     end
   end
 
-  def list_of_children(item, tag_type, tag_class, _tier_class)
+  def list_of_children(item, _tag_type, tag_class, _tier_class)
     return if item.children.size.zero?
 
     # tag.send(tag_type[:branch], class: tag_class[:branch]) do
-      item.children.collect do |child|
-        # concat(tag.send(tag_type[:leaf], class: tag_class[:leaf]) { link_to(">#{child}", child, class:'') })
-        concat(link_to(child.to_s, child, class: tag_class[:leaf] + ' child'))
-      end
+    item.children.collect do |child|
+      # concat(tag.send(tag_type[:leaf], class: tag_class[:leaf]) { link_to(">#{child}", child, class:'') })
+      concat(link_to(child.to_s, child, class: tag_class[:leaf] + ' child'))
+    end
     # end
   end
 

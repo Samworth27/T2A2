@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-
-
 def create_children(parent, children)
   children.each do |child|
     puts "{name: #{child[:name]}, children: #{child[:children].size} }"
-    node = Category.create!(name: child[:name], display: child[:name], parent: parent)
+    node = Category.create!(name: child[:name], display: child[:name], parent:)
     create_children(node, child[:children])
   end
 end
@@ -30,7 +28,8 @@ items.each do |item|
   puts item
   row = Item.new(name: item[:name], plural: item[:plural], category: Category.friendly.find(item[:category]))
   row.save!
-  row.image.attach(io: File.open(Rails.root.join('public', 'images', "#{item[:name]}.jpg")), filename: "#{item[:name]}.jpg")
+  row.image.attach(io: File.open(Rails.root.join('public', 'images', "#{item[:name]}.jpg")),
+                   filename: "#{item[:name]}.jpg")
 end
 
 admin_user = User.new(email: 'admin@localhost', password: 'password')

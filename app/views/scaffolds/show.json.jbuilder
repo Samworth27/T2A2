@@ -1,1 +1,1 @@
-json.partial! "scaffolds/scaffold", scaffold: @scaffold
+json.partial! 'scaffolds/scaffold', scaffold: @scaffold

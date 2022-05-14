@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
   def update
     @item = Item.friendly.find(params[:id])
     if @item.update!(item_params)
-      flash[:notice] = "Item has been updated"
+      flash[:notice] = 'Item has been updated'
       redirect_to edit_item_path(@item)
       # format.html { redirect_to item_url(@item), notice: "item was successfully updated." }
       # format.json { render :show, status: :ok, location: @item }
@@ -29,5 +29,4 @@ class ItemsController < ApplicationController
   def item_params
     params.fetch(:item, {}).permit(:image)
   end
-
 end
