@@ -13,8 +13,16 @@ class Category < ApplicationRecord
     display
   end
 
+  def inspect
+    slug
+  end
+
   def root?
     self == parent
+  end
+
+  def root
+    self.class.first
   end
 
   def siblings
@@ -28,10 +36,17 @@ class Category < ApplicationRecord
   def path_to_root
     path = []
     node = self
+    puts '****************************************************************'
     loop do
+      puts "Node: #{node}"
+      puts "Parent: #{node.parent}"
       path.append(node)
       node = node.parent
-      return path if node == node.parent
+
+      if node.root?
+        puts '****************************************************************'
+        return path
+      end
     end
   end
 
@@ -44,7 +59,6 @@ class Category < ApplicationRecord
   end
 
   def tree(max_depth = 1000)
-    puts children.size
     return display.to_sym if children.size.zero? || max_depth.zero?
     return display.to_sym => children.map { |child| child.tree(max_depth - 1) } if max_depth.positive?
   end
