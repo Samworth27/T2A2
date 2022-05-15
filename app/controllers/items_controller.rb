@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
       # format.html { redirect_to item_url(@item), notice: "item was successfully updated." }
       # format.json { render :show, status: :ok, location: @item }
     else
-      flash.now[:alert] = item.errors.full_messages.join('<br>')
+      flash[:alert] = item.errors.full_messages.join('<br>')
       render 'edit'
       # format.html { render :edit, status: :unprocessable_entity }
       # format.json { render json: @item.errors, status: :unprocessable_entity }

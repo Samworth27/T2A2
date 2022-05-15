@@ -1,0 +1,22 @@
+<%= form_with(model: profile) do |form| %>  
+
+  <% %i[display_name first_name last_name country state suburb].each do |field| %>
+    <% invalid = profile.errors.include?(field) %>
+    <div class="form-group">
+      <%= form.label field %>
+      <%= form.text_field field, class:"form-control #{'is-invalid' if invalid}" %>
+      <% if invalid %>
+        <div class="invalid-feedback d-block">
+          <% profile.errors.full_messages_for(field).each do |message| %>
+            <%= message %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.hidden_field :user, value: current_user.id %>
+    <%= form.submit %>
+  </div>
+<% end %>

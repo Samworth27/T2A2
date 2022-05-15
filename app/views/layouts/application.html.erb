@@ -22,7 +22,7 @@
           <div class="col-9">
             <% flash.each do |key, value| %>
               <div class="<%= flash_class(key) %>">
-                <%= value %><%= key.class %>
+                <%= value %>
               </div>
             <% end %>
             <%= yield %>

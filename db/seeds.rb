@@ -45,12 +45,3 @@ moderator_user.add_role(:moderator)
 trader_user = User.new(email: 'trader@localhost', password: 'password')
 trader_user.save!
 trader_user.add_role(:trader)
-
-# parent = root
-# 5.times do |i|
-#   5.times do |j|
-#     node = Category.new(name: "level-#{i}:#{j}", display: "level-#{i}:#{j}", parent:)
-#     node.save!
-#   end
-#   parent = Category.last
-# end

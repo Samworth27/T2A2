@@ -2,13 +2,6 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-  
-  <% if current_user.avatar.attached? %>
-    <%= image_tag(current_user.avatar)%>
-  <% else %>
-    No Image Uploaded
-  <% end %>
-
 
   <div class="field">
     <%= f.label :email %><br />
@@ -36,11 +29,6 @@
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :avatar %><br />
-    <%= f.file_field :avatar, class: 'form-control'%>
   </div>
 
   <div class="actions">

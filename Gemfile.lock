@@ -68,6 +68,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    addressing (0.3.1)
     administrate (0.17.0)
       actionpack (>= 5.0)
       actionview (>= 5.0)
@@ -130,6 +131,7 @@ GEM
       mime-types (>= 1.0)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
+    geocoder (1.7.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
     http-accept (1.7.0)
@@ -319,6 +321,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  addressing (~> 0.3.1)
   administrate
   administrate-field-active_storage (~> 0.4.1)
   appmap
@@ -330,6 +333,7 @@ DEPENDENCIES
   devise (~> 4.8)
   file_validators (~> 3.0)
   friendly_id (~> 5.4)
+  geocoder (~> 1.7)
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
