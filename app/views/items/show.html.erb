@@ -1,4 +1,4 @@
-<h1><%= @item.plural %></h1>
+<h1 class="text-secondary"><%= @item.plural %></h1>
 <div class="row row-cols-1 row-cols-lg-4 g-4">
   <% @listings.each do |item| %>
     <%= render partial:'listings/card', locals: {item: item, edit: true, display_attributes: []} %>

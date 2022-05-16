@@ -1,6 +1,6 @@
 <div class="col">
-  <div id="<%= dom_id item%>" class='card border-dark border-5 bg-primary bg-gradient'>
-    <%= image_tag("#{item.name}.jpg",aspect_ratio:1.0, width:330, crop: :fill, class:'card-img-top rounded-pill border border-dark border-5') if item.image.attached?%>
+  <div id="<%= dom_id item%>" class='card border-primary-dark border-5 bg-primary bg-gradient'>
+    <%= image_tag("#{item.name}.jpg",aspect_ratio:1.0, width:330, crop: :fill, class:'card-img-top rounded-pill border border-primary-dark border-5') if item.image.attached?%>
     <div class="card-content ratio ratio-21x9">
          <%=  link_to(
            tag.h4(item.plural),
