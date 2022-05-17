@@ -1,4 +1,5 @@
 <div class="list-group-flush">
+<%= @category%>
   <% flat_sidebar_nav(@category).each do |node| %>
     <%= link_to(
       "#{'>'*node[:depth]} #{node[:item].display}",

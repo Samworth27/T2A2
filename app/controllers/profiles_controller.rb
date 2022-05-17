@@ -2,12 +2,6 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile, only: %i[show edit update destroy]
   def show
-
-  end
-
-  def new
-    redirect_to own_profile_path if current_user.profile.nil? == false
-    @profile = Profile.new
   end
 
   def edit
@@ -46,5 +40,7 @@ class ProfilesController < ApplicationController
     end
   end
 
-
+  def profile_params
+    params.fetch(:profile, {}).permit(%i[display_name first_name last_name country state suburb user_id])
+  end
 end

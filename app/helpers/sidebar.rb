@@ -4,8 +4,12 @@
 module Sidebar
   # category Sidebar Suite
   def flat_sidebar_nav(item)
+    puts '*' * 120
+    puts({ item:, grandparent: item.grandparent, parent_root?: item.parent.root? })
     list = [item.grandparent]
     list.append(item.parent.root? ? flat_list_of_siblings(item) : flat_list_of_parents_siblings(item))
+    puts list
+    puts '*' * 120
     unroll_sidebar(list)
   end
 
