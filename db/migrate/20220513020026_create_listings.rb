@@ -6,7 +6,7 @@ class CreateListings < ActiveRecord::Migration[7.0]
       t.references :item, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
       t.float :quantity
-      t.references :quantity_type, null: false, foreign_key: true
+      t.references :measurement, null: false, foreign_key: true
       t.date :start_dtg
       t.date :finish_dtg
 

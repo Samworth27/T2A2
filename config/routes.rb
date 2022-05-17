@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :items
     resources :active_storage_attachments
     resources :scaffolds
-    resources :quantity_types
+    # resources :measurements
     resources :roles
     root to: 'categories#index'
   end

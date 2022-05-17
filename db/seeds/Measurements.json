@@ -1,0 +1,40 @@
+[
+  {
+    "unit": "Gram",
+    "plural": "Grams",
+    "abbreviation": "g",
+    "measurement_for": "Weight",
+    "prefixes": [
+      {
+        "power": 3,
+        "name": "Kilo",
+        "symbol": "k"
+      },
+      {
+        "power": -3,
+        "name": "Milli",
+        "symbol": "m"
+      }
+    ]
+  },
+  {
+    "unit": "Litre",
+    "plural": "Litre",
+    "abbreviation": "L",
+    "measurement_for": "Volume",
+    "prefixes": [
+      {
+        "power": -3,
+        "name": "Milli",
+        "symbol": "m"
+      }
+    ]
+  },
+  {
+    "unit": "Item",
+    "plural": "Items",
+    "abbreviation": "",
+    "measurement_for": "count",
+    "prefixes": []
+  }
+]

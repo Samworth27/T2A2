@@ -10,162 +10,163 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_14_232416) do
+ActiveRecord::Schema[7.0].define(version: 20_220_514_231_707) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  create_table 'active_storage_attachments', force: :cascade do |t|
+    t.string 'name', null: false
+    t.string 'record_type', null: false
+    t.bigint 'record_id', null: false
+    t.bigint 'blob_id', null: false
+    t.datetime 'created_at', null: false
+    t.index ['blob_id'], name: 'index_active_storage_attachments_on_blob_id'
+    t.index %w[record_type record_id name blob_id], name: 'index_active_storage_attachments_uniqueness',
+                                                    unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
-    t.bigint "byte_size", null: false
-    t.string "checksum"
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  create_table 'active_storage_blobs', force: :cascade do |t|
+    t.string 'key', null: false
+    t.string 'filename', null: false
+    t.string 'content_type'
+    t.text 'metadata'
+    t.string 'service_name', null: false
+    t.bigint 'byte_size', null: false
+    t.string 'checksum'
+    t.datetime 'created_at', null: false
+    t.index ['key'], name: 'index_active_storage_blobs_on_key', unique: true
   end
 
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
-    t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  create_table 'active_storage_variant_records', force: :cascade do |t|
+    t.bigint 'blob_id', null: false
+    t.string 'variation_digest', null: false
+    t.index %w[blob_id variation_digest], name: 'index_active_storage_variant_records_uniqueness', unique: true
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.bigint "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "display"
-    t.string "slug"
-    t.index ["category_id"], name: "index_categories_on_category_id"
-    t.index ["slug"], name: "index_categories_on_slug", unique: true
+  create_table 'categories', force: :cascade do |t|
+    t.string 'name'
+    t.bigint 'category_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'display'
+    t.string 'slug'
+    t.index ['category_id'], name: 'index_categories_on_category_id'
+    t.index ['slug'], name: 'index_categories_on_slug', unique: true
   end
 
-  create_table "friendly_id_slugs", force: :cascade do |t|
-    t.string "slug", null: false
-    t.integer "sluggable_id", null: false
-    t.string "sluggable_type", limit: 50
-    t.string "scope"
-    t.datetime "created_at"
-    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  create_table 'friendly_id_slugs', force: :cascade do |t|
+    t.string 'slug', null: false
+    t.integer 'sluggable_id', null: false
+    t.string 'sluggable_type', limit: 50
+    t.string 'scope'
+    t.datetime 'created_at'
+    t.index %w[slug sluggable_type scope], name: 'index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope',
+                                           unique: true
+    t.index %w[slug sluggable_type], name: 'index_friendly_id_slugs_on_slug_and_sluggable_type'
+    t.index %w[sluggable_type sluggable_id], name: 'index_friendly_id_slugs_on_sluggable_type_and_sluggable_id'
   end
 
-  create_table "items", force: :cascade do |t|
-    t.string "name"
-    t.bigint "category_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "slug"
-    t.string "plural"
-    t.index ["category_id"], name: "index_items_on_category_id"
-    t.index ["slug"], name: "index_items_on_slug", unique: true
+  create_table 'items', force: :cascade do |t|
+    t.string 'name'
+    t.bigint 'category_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'slug'
+    t.string 'plural'
+    t.index ['category_id'], name: 'index_items_on_category_id'
+    t.index ['slug'], name: 'index_items_on_slug', unique: true
   end
 
-  create_table "listings", force: :cascade do |t|
-    t.bigint "item_id", null: false
-    t.bigint "user_id", null: false
-    t.float "quantity"
-    t.bigint "quantity_type_id", null: false
-    t.date "start_dtg"
-    t.date "finish_dtg"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "headline"
-    t.index ["item_id"], name: "index_listings_on_item_id"
-    t.index ["quantity_type_id"], name: "index_listings_on_quantity_type_id"
-    t.index ["user_id"], name: "index_listings_on_user_id"
+  create_table 'listings', force: :cascade do |t|
+    t.bigint 'item_id', null: false
+    t.bigint 'user_id', null: false
+    t.float 'quantity'
+    t.bigint 'measurement_id', null: false
+    t.date 'start_dtg'
+    t.date 'finish_dtg'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'headline'
+    t.index ['item_id'], name: 'index_listings_on_item_id'
+    t.index ['measurement_id'], name: 'index_listings_on_measurement_id'
+    t.index ['user_id'], name: 'index_listings_on_user_id'
   end
 
-  create_table "pages", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'measurements', force: :cascade do |t|
+    t.string 'unit'
+    t.string 'plural'
+    t.string 'abbreviation'
+    t.string 'measurement_for'
+    t.string 'prefix'
+    t.integer 'power'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.string "display_name"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "country"
-    t.string "state"
-    t.string "suburb"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_profiles_on_user_id"
+  create_table 'profiles', force: :cascade do |t|
+    t.string 'display_name'
+    t.string 'first_name'
+    t.string 'last_name'
+    t.string 'country'
+    t.string 'state'
+    t.string 'suburb'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.bigint 'user_id', null: false
+    t.index ['user_id'], name: 'index_profiles_on_user_id'
   end
 
-  create_table "quantity_types", force: :cascade do |t|
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "unit_of_measurement"
+  create_table 'roles', force: :cascade do |t|
+    t.string 'name'
+    t.string 'resource_type'
+    t.bigint 'resource_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index %w[name resource_type resource_id], name: 'index_roles_on_name_and_resource_type_and_resource_id'
+    t.index %w[resource_type resource_id], name: 'index_roles_on_resource'
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.string "resource_type"
-    t.bigint "resource_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  create_table 'scaffolds', force: :cascade do |t|
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "scaffolds", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'users', force: :cascade do |t|
+    t.string 'email', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.integer 'sign_in_count', default: 0, null: false
+    t.datetime 'current_sign_in_at'
+    t.datetime 'last_sign_in_at'
+    t.string 'current_sign_in_ip'
+    t.string 'last_sign_in_ip'
+    t.string 'confirmation_token'
+    t.datetime 'confirmed_at'
+    t.datetime 'confirmation_sent_at'
+    t.string 'unconfirmed_email'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['confirmation_token'], name: 'index_users_on_confirmation_token', unique: true
+    t.index ['email'], name: 'index_users_on_email', unique: true
+    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  create_table 'users_roles', id: false, force: :cascade do |t|
+    t.bigint 'user_id'
+    t.bigint 'role_id'
+    t.index ['role_id'], name: 'index_users_roles_on_role_id'
+    t.index %w[user_id role_id], name: 'index_users_roles_on_user_id_and_role_id'
+    t.index ['user_id'], name: 'index_users_roles_on_user_id'
   end
 
-  create_table "users_roles", id: false, force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "role_id"
-    t.index ["role_id"], name: "index_users_roles_on_role_id"
-    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
-    t.index ["user_id"], name: "index_users_roles_on_user_id"
-  end
-
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "categories", "categories"
-  add_foreign_key "items", "categories"
-  add_foreign_key "listings", "items"
-  add_foreign_key "listings", "quantity_types"
-  add_foreign_key "listings", "users"
-  add_foreign_key "profiles", "users"
+  add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
+  add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
+  add_foreign_key 'categories', 'categories'
+  add_foreign_key 'items', 'categories'
+  add_foreign_key 'listings', 'items'
+  add_foreign_key 'listings', 'measurements'
+  add_foreign_key 'listings', 'users'
+  add_foreign_key 'profiles', 'users'
 end

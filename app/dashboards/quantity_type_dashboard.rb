@@ -2,7 +2,7 @@
 
 require 'administrate/base_dashboard'
 
-class QuantityTypeDashboard < Administrate::BaseDashboard
+class MeasurementDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -63,7 +63,7 @@ class QuantityTypeDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how quantity types are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(quantity_type)
-    quantity_type.description
+  def display_resource(measurement)
+    measurement.description
   end
 end

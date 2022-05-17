@@ -13,7 +13,7 @@ class ListingDashboard < Administrate::BaseDashboard
     headline: Field::String,
     item: Field::BelongsTo,
     user: Field::BelongsTo,
-    quantity_type: Field::BelongsTo,
+    measurement: Field::BelongsTo,
     id: Field::Number,
     quantity: Field::Number.with_options(decimals: 2),
     start_dtg: Field::Date,
@@ -31,7 +31,7 @@ class ListingDashboard < Administrate::BaseDashboard
     headline
     item
     quantity
-    quantity_type
+    measurement
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -40,7 +40,7 @@ class ListingDashboard < Administrate::BaseDashboard
     headline
     item
     quantity
-    quantity_type
+    measurement
     user
     start_dtg
     finish_dtg
@@ -56,7 +56,7 @@ class ListingDashboard < Administrate::BaseDashboard
     item
     user
     quantity
-    quantity_type
+    measurement_type
     start_dtg
     finish_dtg
   ].freeze
