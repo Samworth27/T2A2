@@ -4,7 +4,9 @@ require 'sidebar'
 # Helpers for the entire application
 
 module ApplicationHelper
+  
   include Sidebar
+
   def active_class(path)
     if request.path == path
       'active'

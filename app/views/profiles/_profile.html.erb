@@ -1,12 +1,11 @@
-<%= form_with(model: profile) do |form| %>  
-
+<%= form_with(model: profile, url: manage_profile_path, method: 'put') do |form| %>  
   <% %i[display_name first_name last_name country state suburb].each do |field| %>
     <% invalid = profile.errors.include?(field) %>
-    <div class="form-group">
-      <%= form.label field %>
+    <div class="form-floating mb-3">
       <%= form.text_field field, class:"form-control #{'is-invalid' if invalid}" %>
+      <%= form.label field %>
       <% if invalid %>
-        <div class="invalid-feedback d-block">
+        <div class="form-text invalid-feedback">
           <% profile.errors.full_messages_for(field).each do |message| %>
             <%= message %>
           <% end %>
@@ -16,7 +15,6 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.hidden_field :user, value: current_user.id %>
     <%= form.submit %>
   </div>
 <% end %>

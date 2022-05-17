@@ -1,32 +1,36 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
-  
+  # Admin Dashboard
   namespace :admin do
     resources :categories
-    resources :listings
-    resources :active_storage_blobs
     resources :items
-    resources :active_storage_attachments
-    resources :scaffolds
-    # resources :measurements
+    resources :listings
+    resources :users
+    resources :profiles
     resources :roles
+    resources :active_storage_blobs
+    resources :active_storage_attachments
+    resources :measurements
     root to: 'categories#index'
   end
 
+  # Trader Dashboard
   namespace :trader do
     resources :listings
     root to: 'listings#index'
   end
 
-  get '/profile', to: 'profiles#show', as: :own_profile
-  get '/profile/edit', to: 'profiles#edit', as: :edit_own_profile
-  put '/profile/edit', to: 'profiles#update'
-  patch '/profile/edit', to: 'profiles#update'
-  resources :profiles
+  scope :profile do
+    get 'edit', to: 'profiles#edit', as: :manage_profile
+    put 'edit', to: 'profiles#update'
+    patch 'edit', to: 'profiles#update'
+    get '', to: 'profiles#show', as: :own_profile
+  end
 
-  # resolve("Profile") { [:profile] }
+  get 'users', to: 'profiles#edit'
+  
+  resolve("Profile") { [:profile] }
 
   scope '/view' do
     get '/categories/root', to: redirect('view/categories')
@@ -36,12 +40,12 @@ Rails.application.routes.draw do
     resources :items
     resources :listings
     root to: 'categories#index', as: :view
+    get '/profile/:id', to: 'profile#show'
   end
-
+  
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
-
 
   get '/moderator', to: 'static_pages#moderator', as: :moderator_root
 

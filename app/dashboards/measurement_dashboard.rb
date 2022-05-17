@@ -2,7 +2,7 @@
 
 require 'administrate/base_dashboard'
 
-class ListingDashboard < Administrate::BaseDashboard
+class MeasurementDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -10,14 +10,11 @@ class ListingDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    headline: Field::String,
-    item: Field::BelongsTo,
-    user: Field::BelongsTo,
-    measurement: Field::BelongsTo,
     id: Field::Number,
-    quantity: Field::Number.with_options(decimals: 2),
-    start_dtg: Field::Date,
-    finish_dtg: Field::Date,
+    unit: Field::String,
+    plural: Field::String,
+    abbreviation: Field::String,
+    power: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -28,22 +25,20 @@ class ListingDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    headline
-    item
-    quantity
-    measurement
+    id
+    unit
+    abbreviation
+    created_at
+    updated_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    headline
-    item
-    quantity
-    measurement
-    user
-    start_dtg
-    finish_dtg
+    id
+    unit
+    abbreviation
+    power
     created_at
     updated_at
   ].freeze
@@ -52,13 +47,12 @@ class ListingDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    headline
-    item
-    user
-    quantity
-    measurement
-    start_dtg
-    finish_dtg
+    unit
+    plural
+    abbreviation
+    power
+    created_at
+    updated_at
   ].freeze
 
   # COLLECTION_FILTERS
@@ -73,10 +67,10 @@ class ListingDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how listings are displayed
+  # Overwrite this method to customize how quantity types are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(listing)
-  #   "Listing ##{listing.id}"
-  # end
+  def display_resource(measurement)
+    measurement.unit
+  end
 end

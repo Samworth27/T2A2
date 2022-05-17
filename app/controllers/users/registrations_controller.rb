@@ -21,7 +21,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   # def update
-  #   super
+  #   self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+  #   prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+
+  #   resource_updated = update_resource(resource, account_update_params)
+  #   yield resource if block_given?
+  #   if resource_updated
+  #     set_flash_message_for_update(resource, prev_unconfirmed_email)
+  #     bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
+
+  #     respond_with resource, location: manage_profile_path
+  #   else
+  #     clean_up_passwords resource
+  #     set_minimum_password_length
+  #     # @profile = current_user.profile
+  #     render 'profiles/edit', status: :unprocessable_entity
+  #   end
   # end
 
   # DELETE /resource
@@ -49,11 +64,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def configure_account_update_params
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
   # end
-
+  # def after_update_path_for(resource)
+  #   sign_in_after_change_password? ? signed_in_root_path(resource) : new_session_path(resource_name)
+  # end
+  
   # The path used after sign up.
   def after_sign_up_path_for(resource)
     super(resource)
-    edit_profile_path
+    Profile.new(user_id: current_user.id).save!(validate: false)
+    manage_profile_path
+  end
+
+  def user_root_path
+    manage_profile_path
   end
 
   # The path used after sign up for inactive accounts.

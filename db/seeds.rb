@@ -60,6 +60,7 @@ def add_user_with_role(user, role)
   new_user = User.new(email: "#{user}@localhost", password: 'password')
   new_user.save!
   new_user.add_role(role)
+  Profile.new(user: new_user).save(validate: false)
   return if ENV['output'] == 'false'
 
   puts "Seeding User '#{new_user.email}' with role/s '#{new_user.roles.collect(&:name).join(',')}' successfull"
@@ -103,7 +104,6 @@ seed_files_path = Rails.root.join('db', 'seeds')
 if ENV['full'] == 'true'
   seed_categories(seed_files_path)
   seed_items(seed_files_path, public_image_path)
-  
 end
 
 seed_users unless ENV['users'] == 'false'

@@ -4,6 +4,7 @@
     "plural": "Grams",
     "abbreviation": "g",
     "measurement_for": "Weight",
+    "power": 1,
     "prefixes": [
       {
         "power": 3,
@@ -22,6 +23,7 @@
     "plural": "Litre",
     "abbreviation": "L",
     "measurement_for": "Volume",
+    "power": 1,
     "prefixes": [
       {
         "power": -3,
@@ -33,6 +35,13 @@
   {
     "unit": "Item",
     "plural": "Items",
+    "abbreviation": "",
+    "measurement_for": "count",
+    "prefixes": []
+  },
+  {
+    "unit": "Bag",
+    "plural": "Bags",
     "abbreviation": "",
     "measurement_for": "count",
     "prefixes": []

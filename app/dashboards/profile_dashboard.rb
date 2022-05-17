@@ -1,8 +1,6 @@
-# frozen_string_literal: true
+require "administrate/base_dashboard"
 
-require 'administrate/base_dashboard'
-
-class MeasurementDashboard < Administrate::BaseDashboard
+class ProfileDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -10,11 +8,16 @@ class MeasurementDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    user: Field::BelongsTo,
     id: Field::Number,
-    description: Field::String,
-    unit_of_measurement: Field::String,
+    display_name: Field::String,
+    first_name: Field::String,
+    last_name: Field::String,
+    country: Field::String,
+    state: Field::String,
+    suburb: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,18 +27,20 @@ class MeasurementDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    unit_of_measurement
-    description
-    created_at
-    updated_at
+    user
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
+    user
     id
-    unit_of_measurement
-    description
+    display_name
+    first_name
+    last_name
+    country
+    state
+    suburb
     created_at
     updated_at
   ].freeze
@@ -44,8 +49,13 @@ class MeasurementDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    unit_of_measurement
-    description
+    user
+    display_name
+    first_name
+    last_name
+    country
+    state
+    suburb
   ].freeze
 
   # COLLECTION_FILTERS
@@ -60,10 +70,10 @@ class MeasurementDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how quantity types are displayed
+  # Overwrite this method to customize how profiles are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(measurement)
-    measurement.description
-  end
+  # def display_resource(profile)
+  #   "Profile ##{profile.id}"
+  # end
 end

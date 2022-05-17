@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_profile, only: %i[show edit update destroy]
   def show
 
@@ -10,7 +11,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-
+    @profile = Profile.new if current_user.profile.nil? == true
   end
 
   def create
@@ -45,7 +46,5 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def profile_params
-    params.fetch(:profile, {}).permit(%i[display_name first_name last_name country state suburb user_id])
-  end
+
 end

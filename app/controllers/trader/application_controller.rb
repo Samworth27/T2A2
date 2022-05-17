@@ -8,8 +8,10 @@
 # you're free to overwrite the RESTful controller actions.
 module Trader
   class ApplicationController < Administrate::ApplicationController
-    before_action :authenticate_admin
     before_action :authenticate_user!
+    before_action :check_valid_profile
+    before_action :authenticate_admin
+    
 
     def authenticate_admin
       # TODO: Add authentication logic here.
@@ -20,5 +22,14 @@ module Trader
     # def records_per_page
     #   params[:per_page] || 20
     # end
+    def check_valid_profile
+      controller_exceptions = %w[profiles static_pages admin sessions registrations]
+  
+      if user_signed_in? && current_user.profile.valid? == false && controller_exceptions.include?(controller_name) == false
+        flash[:alert] = "You need to complete your profile."
+        redirect_to(manage_profile_path)
+      end
+    end
   end
+
 end

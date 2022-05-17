@@ -8,10 +8,11 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  POST /resource/sign_in
+  def create
+    super
+    redirect_to own_profile_path unless self.profile.valid?
+  end
 
   # DELETE /resource/sign_out
   # def destroy
