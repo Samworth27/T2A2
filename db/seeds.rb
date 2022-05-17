@@ -26,7 +26,8 @@ def seed_categories(path)
   Item.destroy_all
   Category.all.reverse.each(&:destroy)
   categories = read_seed_file(path, :Categories)
-  categories.collect! { |category| create_category(category, create_root) }
+  root = create_root
+  categories.collect! { |category| create_category(category, root) }
   return unless ENV['output'] == 'false'
 
   categories.flatten.each do |category|
