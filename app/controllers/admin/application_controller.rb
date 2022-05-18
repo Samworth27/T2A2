@@ -9,7 +9,7 @@
 module Admin
   class ApplicationController < Administrate::ApplicationController
     include Pundit::Authorization
-    include Administrate::Punditize
+    # include Administrate::Punditize
     before_action :authenticate_user!
     before_action :authorize_admin
     
