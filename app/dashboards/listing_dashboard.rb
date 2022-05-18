@@ -54,7 +54,6 @@ class ListingDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     headline
     item
-    user
     quantity
     measurement
     start_dtg
