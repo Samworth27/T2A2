@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_18_042953) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_18_052637) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_042953) do
     t.string "slug"
     t.index ["category_id"], name: "index_categories_on_category_id"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -102,13 +107,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_042953) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.bigint "originator_id", null: false
-    t.bigint "recipient_id", null: false
-    t.text "message"
+    t.bigint "user_id", null: false
+    t.bigint "conversation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["originator_id"], name: "index_messages_on_originator_id"
-    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -137,6 +141,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_042953) do
   create_table "scaffolds", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_conversations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "conversation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_user_conversations_on_conversation_id"
+    t.index ["user_id", "conversation_id"], name: "index_user_conversations_on_user_id_and_conversation_id", unique: true
+    t.index ["user_id"], name: "index_user_conversations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -176,7 +190,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_18_042953) do
   add_foreign_key "listings", "items"
   add_foreign_key "listings", "measurements"
   add_foreign_key "listings", "users"
-  add_foreign_key "messages", "users", column: "originator_id"
-  add_foreign_key "messages", "users", column: "recipient_id"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "user_conversations", "conversations"
+  add_foreign_key "user_conversations", "users"
 end

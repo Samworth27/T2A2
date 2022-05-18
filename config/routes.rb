@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # Trader Dashboard
   namespace :trader do
     resources :listings
+    resources :messages
     root to: 'listings#index'
   end
 
