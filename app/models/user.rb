@@ -8,17 +8,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :profile, dependent: :destroy
-  has_many :sent_messages, class_name: 'Message', foreign_key: 'originator_id'
-  has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
+  
+  has_many :user_conversations, dependent: :destroy
+  has_many :conversations, through: :user_conversations, dependent: :destroy
 
   def export
     super(%i[email encrypted_password])
-  end
-  def messages
-    sent_messages + received_messages
-  end
-
-  def new_message(recipient, message)
-    Message.create!(originator: self, recipient:, message:)
   end
 end

@@ -161,3 +161,9 @@ $aspect-ratios: map-merge($aspect-ratios, $custom-ratios);
 // .card{
 //   transition: border-color 1s, box-shadow 0.5s !important;
 // }
+
+.message-container {
+  min-height: 30vh !important;
+  max-height: 40vh !important;
+  overflow-y: scroll !important;
+}

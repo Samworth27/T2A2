@@ -1,4 +1,4 @@
-class MessagePolicy < ApplicationPolicy
+class ConversationPolicy < ApplicationPolicy
   def index?
     true
   end

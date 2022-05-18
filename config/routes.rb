@@ -18,8 +18,13 @@ Rails.application.routes.draw do
   # Trader Dashboard
   namespace :trader do
     resources :listings
-    resources :messages
     root to: 'listings#index'
+  end
+
+  namespace :messages do
+    post '/new', to: 'messages#create', as: :new
+    get 'conversation/:id', to: 'conversations#show', as: :conversation
+    root to: 'conversations#index'
   end
 
   scope :profile do

@@ -1,61 +1,34 @@
-<%#
-# Application Layout
-
-This view template is used as the layout
-for every page that Administrate generates.
-
-By default, it renders:
-- Navigation
-- Content for a search bar
-  (if provided by a `content_for` block in a nested page)
-- Flashes
-- Links to stylesheets and JavaScripts
-%>
 <!DOCTYPE html>
-<html lang="<%= I18n.locale %>">
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta name="ROBOTS" content="NOODP">
-    <meta name="viewport" content="initial-scale=1">
-    <title>
-      <%= content_for(:title) %> - <%= application_title %>
-    </title>
-    <%= render "stylesheet" %>
+    <title>Marketplace</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-colour" content="#FF0000"/>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag if defined?(csp_meta_tag) %>
   </head>
   <body class="bg-primary-light">
-    <%= render "icons" %>
     <div class="d-flex flex-column container-fluid">
       <%# Header%>
-      
-          <%= render "/shared/header" %>
-
-
-      
-      <div style="{flex: 1 0 auto;}">
+      <%= render "shared/header" %>
+      <%# content %>
+      <main style="{flex: 1 0 auto;}">
         <div class="row">
-
-          <%# Sidebar %>
           <div class="col-12 col-lg-3 px-0">
-            <%= render('navigation')%>
+            <%= render('sidebar')%>
           </div>
-
-          <%# content %>
-          <main class="col-9">
-            <!--<% flash.each do |key, value| %>
+          <div class="col-9">
+            <% flash.each do |key, value| %>
               <div class="<%= flash_class(key) %>">
-                <%= value %><%= key.class %>
+                <%= value %>
               </div>
-            <% end %>-->
-            <%= render "flashes" -%>
+            <% end %>
             <%= yield %>
-          </main>
+          </div>
         </div>
-      </div>
-
+      </main>
       <%# footer  %>
       <div class="container">
         <footer class="py-3 my-4">
@@ -70,6 +43,5 @@ By default, it renders:
         </footer>
       </div>
     </div>
-    <%= render "javascript" %>
   </body>
 </html>

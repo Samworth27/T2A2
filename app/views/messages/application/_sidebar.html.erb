@@ -1,0 +1,8 @@
+<div class="list-group-flush">
+  <div class="list-group-item list-group-item-primary p-3 px-2">
+    Conversations
+  </div>
+  <% @conversations.each do |node| %>
+    <%= link_to(node.other_user(current_user).email, messages_conversation_path(node), data: {turbo_frame: 'conversation' }, class: "list-group-item list-group-item-action list-group-item-primary p-3 px-2 #{@conversation == node ? 'active' : ''}") %>
+  <% end %>
+</div>

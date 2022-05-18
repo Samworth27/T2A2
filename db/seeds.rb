@@ -106,7 +106,7 @@ if ENV['full'] == 'true'
   seed_categories(seed_files_path)
   seed_items(seed_files_path, public_image_path)
 end
-
+Conversation.destroy_all
 seed_users unless ENV['users'] == 'false'
 
 seed_measurements(seed_files_path)
