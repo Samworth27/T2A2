@@ -1,6 +1,10 @@
-<h1 class="text-secondary"><%= @category %></h1>
-<div class="row row-cols-1 row-cols-lg-4 g-4">
-  <% @items.each do |item| %>
-    <%= render partial:'items/card', locals: {item: item, edit: true, display_attributes: []} %>
-  <% end %>
+<div class="container my-5 ">
+  <div class="rounded-3 p-4 border shadow-lg bg-primary-dark text-secondary">
+    <h1 class="text-secondary"><%= @category %></h1>
+    <div class="row row-cols-1 row-cols-lg-4 g-4">
+      <% @items.each do |item| %>
+        <%= render partial:'items/card', locals: {item: item, edit: true, display_attributes: []} %>
+      <% end %>
+    </div>
+  </div>
 </div>

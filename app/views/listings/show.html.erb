@@ -1,2 +1,13 @@
-<h1 class="text-secondary">Listing#show</h1>
-<p>Find me in app/views/listing/show.html.erb</p>
+<div class="container my-5 ">
+  <div class="rounded-3 p-4 border shadow-lg bg-primary-dark text-secondary">
+    <h1 class="text-secondary"><%= @listing.headline %> </h1>
+    <hr>
+    <%= "#{@listing.quantity} #{@measurement} of #{@name}" %>
+    <%# <%= cl_image_tag(item.image.key,aspect_ratio:1.0, width:330, crop: :fill, class:'card-img-top rounded-pill border border-dark border-5') if item.image.attached? %>
+    <%# <div class="card-content ratio ratio-21x9">
+         
+    </div> %>
+    <hr>
+    <%= link_to "Return to #{@item.plural}", item_path(@category,@item), class:"text-secondary" %>
+  </div>
+</div>

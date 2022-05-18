@@ -13,7 +13,6 @@ and renders all form fields for a resource's editable attributes.
 
 [1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Form
 %>
-
 <%= form_for([namespace, page.resource], html: { class: "form" }) do |f| %>
   <% if page.resource.errors.any? %>
     <div id="error_explanation">
@@ -24,21 +23,21 @@ and renders all form fields for a resource's editable attributes.
           resource_name: display_resource_name(page.resource_name, singular: true)
         ) %>
       </h2>
-
-      <ul>
-        <% page.resource.errors.full_messages.each do |message| %>
-          <li class="flash-error"><%= message %></li>
-        <% end %>
-      </ul>
     </div>
   <% end %>
-
   <% page.attributes(controller.action_name).each do |attribute| -%>
-    <div class="form-floating field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
-      <%= render_field attribute, f: f %>
+    <div class = "form-floating mb-3">
+      <% invalid = page.resource.errors.include?(attribute.attribute) %>
+      <%= render_field attribute, {f: f, invalid: invalid} %>
+      <% if invalid %>
+        <div class="form-text invalid-feedback">
+          <% page.resource.errors.full_messages_for(attribute.attribute).each do |message| %>
+            <%= message %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   <% end -%>
-
   <div class="form-actions">
     <%= f.submit %>
   </div>
