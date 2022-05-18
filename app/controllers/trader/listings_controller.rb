@@ -13,7 +13,7 @@ module Trader
     def create
       resource = resource_class.new(resource_params)
       authorize_resource(resource)
-      resource.user = current_user
+      resource.owner = current_user
       if resource.save
         redirect_to(
           after_resource_created_path(resource),

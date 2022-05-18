@@ -12,7 +12,7 @@ class ListingDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     headline: Field::String,
     item: Field::BelongsTo,
-    user: Field::BelongsTo,
+    owner: Field::BelongsTo,
     measurement: Field::BelongsTo,
     id: Field::Number,
     quantity: Field::Number.with_options(decimals: 2),
@@ -41,7 +41,7 @@ class ListingDashboard < Administrate::BaseDashboard
     item
     quantity
     measurement
-    user
+    owner
     start_dtg
     finish_dtg
     created_at

@@ -8,13 +8,14 @@
 # you're free to overwrite the RESTful controller actions.
 module Trader
   class ApplicationController < Administrate::ApplicationController
+    include Administrate::Punditize
     before_action :authenticate_user!
     before_action :check_valid_profile
-    before_action :authenticate_admin
-    
+    rescue_from ActiveRecord::RecordNotFound, with: :user_not_authorized
 
-    def authenticate_admin
-      # TODO: Add authentication logic here.
+    def user_not_authorized
+      flash[:alert] = 'You are not authorized to perform this action.'
+      redirect_back(fallback_location: trader_root_path)
     end
 
     # Override this value to specify the number of elements to display at a time
@@ -22,6 +23,7 @@ module Trader
     # def records_per_page
     #   params[:per_page] || 20
     # end
+
     def check_valid_profile
       controller_exceptions = %w[profiles static_pages admin sessions registrations]
   
