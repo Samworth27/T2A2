@@ -2,7 +2,7 @@
 
 class ItemsController < ApplicationController
   def show
-    @item = Item.friendly.find(params[:id])
+    @item = Item.includes(:listings).friendly.find(params[:id])
     @category = Category.friendly.find(params[:cat_id])
     @listings = @item.listings
   end

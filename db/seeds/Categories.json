@@ -1,72 +1,89 @@
 [
   {
     "name": "Fresh Produce",
+    "plural" : "Fresh Produce",
     "children": [
       {
         "name": "Fruit",
+        "plural" : "Fruit",
         "children": []
       },
       {
-        "name": "Vegetables",
+        "name": "Vegetable",
+        "plural" : "Vegetables",
         "children": []
       },
       {
         "name": "Nuts",
+        "plural" : "Nuts",
         "children": []
       }
     ]
   },
   {
     "name": "Raw Animal Products",
+    "plural" : "Raw Animal Products",
     "children": [
       {
-        "name": "Meats",
+        "name": "Meat",
+        "plural" : "Meats",
         "children": [
           {
-            "name": "Beef/ Veal",
+            "name": "Beef",
+            "plural" : "Beef",
             "children": []
           },
           {
             "name": "Pork",
+            "plural" : "Pork",
             "children": []
           },
           {
-            "name": "Lamb/ Mutton",
+            "name": "Lamb",
+            "plural" : "Lamb",
             "children": []
           }
         ]
       },
       {
         "name": "Milk",
+        "plural" : "Milk",
         "children": []
       },
       {
-        "name": "Eggs",
+        "name": "Egg",
+        "plural" : "Eggs",
         "children": []
       },
       {
         "name": "Bee Products",
+        "plural" : "Bee Products",
         "children": []
       },
       {
         "name": "Seafood",
+        "plural" : "Seafood",
         "children": []
       }
     ]
   },
   {
-    "name": "Artisanal Goods",
+    "name": "Artisanal goods",
+    "plural" : "Artisanal Goods",
     "children": [
       {
         "name": "Dairy Products",
+        "plural" : "Dairy Products",
         "children": []
       },
       {
         "name": "Jams and Preserves",
+        "plural" : "Jams and Preserves",
         "children": []
       },
       {
         "name": "Dried, Cured or Smoked Meats",
+        "plural" : "Dried, Cured or Smoked Meats",
         "children": []
       }
     ]

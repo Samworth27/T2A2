@@ -15,5 +15,5 @@ that displays all possible records to associate with.
 
 [1]: http://www.rubydoc.info/gems/administrate/Administrate/Field/BelongsTo
 %>
-<%= f.select(field.permitted_attribute, options_for_select(field.associated_resource_options, field.selected_option),{}, {class:'form-select',include_blank: field.include_blank_option}) %>
+<%= f.select(field.permitted_attribute, options_for_select(field.associated_resource_options, field.selected_option),{}, {class:"form-select #{'is-invalid' if invalid}",include_blank: field.include_blank_option}) %>
 <%= f.label field.permitted_attribute %>

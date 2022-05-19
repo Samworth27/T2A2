@@ -1,7 +1,7 @@
 class Conversation < ApplicationRecord
   has_many :user_conversations, dependent: :destroy
   has_many :users, through: :user_conversations
-  has_many :messages
+  has_many :messages, dependent: :destroy
 
   def self.between(user1, user2)
     conversations = user1.conversations.to_a.intersection(user2.conversations.to_a)

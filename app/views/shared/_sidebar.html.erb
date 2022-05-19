@@ -1,8 +1,0 @@
-<div class="list-group-flush">
-  <% flat_sidebar_nav(@category).each do |node| %>
-    <%= link_to(
-      "#{'>'*node[:depth]} #{node[:item].display}",
-       node[:item], 
-       class: "list-group-item list-group-item-action list-group-item-primary p-3 px-2 #{@category == node[:item]? 'active' : ''}") %>
-  <% end %>
-</div>

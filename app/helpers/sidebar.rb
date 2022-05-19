@@ -4,50 +4,52 @@
 module Sidebar
   # category Sidebar Suite
   def flat_sidebar_nav(item)
-    list = [item.grandparent]
-    list.append(item.parent.root? ? flat_list_of_siblings(item) : flat_list_of_parents_siblings(item))
+    list = Category.root.own_tree
     unroll_sidebar(list)
   end
 
   def unroll_sidebar(list, depth = 0)
     list.collect do |node|
-      node.instance_of?(Category) ? { item: node, depth: } : unroll_sidebar(node, depth + 1)
+      level = [{item: node[:self], depth:}] 
+
+      node.key?(:children) ? level.append(unroll_sidebar(node[:children], depth + 1)) : level
     end.flatten
   end
 
-  def flat_list_of_children(item)
-    return if item.children.size.zero?
+  # Second retired sidebar
+  # def flat_list_of_children(item)
+  #   return if item.children.size.zero?
 
-    item.children.collect do |child|
-      child
-    end
-  end
+  #   item.children.collect do |child|
+  #     child
+  #   end
+  # end
 
-  def flat_list_of_siblings(item)
-    list = []
-    item.siblings.collect do |sibling|
-      next if sibling.root?
+  # def flat_list_of_siblings(item)
+  #   list = []
+  #   item.siblings.collect do |sibling|
+  #     next if sibling.root?
 
-      list.append(sibling)
-      next unless sibling == item && !item.children.empty?
+  #     list.append(sibling)
+  #     next unless sibling == item && !item.children.empty?
 
-      list.append(flat_list_of_children(item))
-    end
-    list
-  end
+  #     list.append(flat_list_of_children(item))
+  #   end
+  #   list
+  # end
 
-  def flat_list_of_parents_siblings(item)
-    list = []
-    item.parent.siblings.collect do |p_sibling|
-      next if p_sibling.root?
+  # def flat_list_of_parents_siblings(item)
+  #   list = []
+  #   item.parent.siblings.collect do |p_sibling|
+  #     next if p_sibling.root?
 
-      list.append(p_sibling)
-      next unless p_sibling == item.parent
+  #     list.append(p_sibling)
+  #     next unless p_sibling == item.parent
 
-      list.append(flat_list_of_siblings(item))
-    end
-    list
-  end
+  #     list.append(flat_list_of_siblings(item))
+  #   end
+  #   list
+  # end
 
   #
   # Retired original implementation

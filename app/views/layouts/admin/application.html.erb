@@ -30,7 +30,7 @@ By default, it renders:
     <%= render "icons" %>
     <div class="d-flex flex-column container-fluid">
       <%# Header%>
-      <%= render "/shared/header" %>
+      <%= render "application/header" %>
       <div style="{flex: 1 0 auto;}">
         <div class="row">
           <%# Sidebar %>
@@ -51,7 +51,7 @@ By default, it renders:
       </div>
       <%# footer  %>
       <div class="container">
-        <%= render('/shared/footer')%>
+        <%= render 'application/footer' %>
       </div>
     </div>
     <%= render "javascript" %>

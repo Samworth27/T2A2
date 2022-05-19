@@ -19,29 +19,31 @@
         <h5>Description</h5>
         <%= "#{@listing.quantity} #{@listing.measurement_display} of #{@listing.item_name}" %>
       </div>
-      <div class="list-group-item list-group-item-primary">
-      <h5>Send <%= @listing.owner.profile.display_name.capitalize %> a message about this listing</h5>
-        <%= form_with(model: @message, url: messages_new_path) do |form| %>
-          <div class="row w-100 pt-3">
-            <div class="col-9 form-floating text-dark">
-              <% invalid = @message.errors.include?('body') %>
-              <%= form.text_area :body, class:"w-100 form-control #{'is-invalid' if invalid}" %>
-              <div class="form-text invalid-feedback">
-                <% @message.errors.full_messages_for('body').each do |message| %>
-                  <%= message %>
-                <% end %>
+      <% unless @listing.owner == current_user %>
+        <div class="list-group-item list-group-item-primary">
+          <h5>Send <%= @listing.owner.profile.display_name.capitalize %> a message about this listing</h5>
+          <%= form_with(model: @message, url: messages_new_path) do |form| %>
+            <div class="row w-100 pt-3">
+              <div class="col-9 form-floating text-dark">
+                <% invalid = @message.errors.include?('body') %>
+                <%= form.text_area :body, class:"w-100 form-control #{'is-invalid' if invalid}" %>
+                <div class="form-text invalid-feedback">
+                  <% @message.errors.full_messages_for('body').each do |message| %>
+                    <%= message %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-3">
+                <%= form.hidden_field :listing, value: @listing.id%>
+                <%= form.hidden_field :recipient, value: @listing.owner.id %>
+                <%= form.submit 'Send Message', class:'form-control' %>
               </div>
             </div>
-            <div class="col-3">
-              <%= form.hidden_field :listing, value: @listing.id%>
-              <%= form.hidden_field :recipient, value: @listing.owner.id %>
-              <%= form.submit 'Send Message', class:'form-control' %>
-            </div>
-          </div>
+          <% end %>
         </div>
       <% end %>
+      <hr>
+      <%= link_to "Return to #{@listing.category.plural}", @listing.category, class:"text-secondary" %>
     </div>
-    <hr>
-    <%= link_to "Return to #{@listing.item.plural}", item_path(@listing.item.category,@listing.item), class:"text-secondary" %>
   </div>
 </div>

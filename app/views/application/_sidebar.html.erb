@@ -1,0 +1,13 @@
+<% class_string = 'list-group-item list-group-item-action list-group-item-primary p-3 px-2'%>
+<% def style_string() %>
+<% "padding-left: #{yield}em !important" %>
+<% end %>
+<div class="list-group">
+  <% Category.roots.each do |root| %>
+    <%= link_to(root.name, root, class:class_string) %>
+    <% root.subtree.each do |node| %>
+      <% next if node == root %>
+      <%= link_to(node.name, node, class:class_string,style:style_string{node.depth + 1}) unless node.children? == false && node.depth > 1%>
+    <% end %>
+  <% end %>
+</div>

@@ -8,6 +8,11 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.friendly.find(params[:id])
-    @items = @category.all_descendants.collect(&:items).flatten.sort
+    @items = @category.descendants
+    @listings = Listing.where(category: @category.subtree)
+  end
+
+  def category_params
+    params.fetch(:category, {}).permit(:image)
   end
 end

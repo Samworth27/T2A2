@@ -97,3 +97,5 @@ gem 'administrate-field-active_storage', '~> 0.4.1'
 gem "addressing", "~> 0.3.1"
 
 gem "geocoder", "~> 1.7"
+
+gem "ancestry", "~> 4.1"

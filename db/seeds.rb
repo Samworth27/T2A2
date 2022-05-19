@@ -8,47 +8,36 @@ end
 
 # Categories
 
-def create_root
-  root = Category.new(name: 'root', display: 'Categories')
-  root.parent = root
-  root.save(validate: false)
-  root
-end
-
-def create_category(category, parent)
-  node = Category.new(name: category[:name], display: category[:name], parent:)
-  node.save!
-  children = category[:children].collect { |child| create_category(child, node) }
-  children.empty? ? node : [node] + children
+def create_category(category, parent = nil)
+  node = if parent.nil?
+           Category.create!(name: category[:name],
+                            plural: category[:plural])
+         else
+           parent.children.create!(
+             name: category[:name], plural: category[:plural]
+           )
+         end
+  puts "Seeding category '#{node.slug}' successfull" unless ENV['output'] == 'false'
+  category[:children].each do |child|
+    create_category(child, node)
+  end
 end
 
 def seed_categories(path)
-  Item.destroy_all
-  Category.all.reverse.each(&:destroy)
+  Category.destroy_all
   categories = read_seed_file(path, :Categories)
-  root = create_root
-  categories.collect! { |category| create_category(category, root) }
-  return unless ENV['output'] == 'false'
-
-  categories.flatten.each do |category|
-    # puts({ category:, children: category.children.size })
-    puts "Seeding category '#{category}' successfull"
+  categories.each do |category|
+    create_category(category)
   end
 end
 
 # Items
 
-def attach_local_image(item, path, filename)
-  item.image.attach(io: File.open("#{path}/#{filename}"), filename:) if ENV['item-images'] == true
-end
-
 def seed_items(seed_path, image_path)
   Item.destroy_all
   items = read_seed_file(seed_path, :Items)
   items.each do |item|
-    row = Item.new(name: item[:name], plural: item[:plural], category: Category.friendly.find(item[:category]))
-    row.save!
-    attach_local_image(row, image_path, "#{item[:name]}.jpg")
+    row = Category.friendly.find(item[:category]).children.create!(name: item[:name], plural: item[:plural])
     next if ENV['output'] == 'false'
 
     puts "Seeding Item '#{row.name}' successfull"
@@ -68,6 +57,10 @@ def add_user_with_role(user, role)
 end
 
 def seed_users
+  Profile.destroy_all
+  UserConversation.destroy_all
+  Message.destroy_all
+  Conversation.destroy_all
   Listing.destroy_all
   User.destroy_all
 
@@ -87,6 +80,7 @@ def seed_measurements(path)
     row = Measurement.new(measurement)
     row.save!
     next if prefixes.empty?
+
     prefixes.each do |prefix|
       p_row = Measurement.new(measurement)
       p_row.unit = prefix[:name] + p_row.unit.downcase
@@ -98,15 +92,29 @@ def seed_measurements(path)
   end
 end
 # Main Program
+Message.delete_all
+UserConversation.delete_all
+Conversation.delete_all
+Listing.delete_all
+Profile.delete_all
+User.delete_all
 
-public_image_path = Rails.root.join('public', 'images')
+public_image_path = Rails.root.join('app', 'assets', 'images')
 seed_files_path = Rails.root.join('db', 'seeds')
 
-if ENV['full'] == 'true'
-  seed_categories(seed_files_path)
-  seed_items(seed_files_path, public_image_path)
+def attach_local_image(item, path, filename)
+  item.image.attach(io: File.open("#{path}/#{filename}"), filename:)
 end
+
+seed_categories(seed_files_path)
+seed_items(seed_files_path, public_image_path)
+
+Category.all.each do |cat|
+  attach_local_image(cat, public_image_path, "#{cat.slug}.jpg")
+end
+
 Conversation.destroy_all
+
 seed_users unless ENV['users'] == 'false'
 
 seed_measurements(seed_files_path)

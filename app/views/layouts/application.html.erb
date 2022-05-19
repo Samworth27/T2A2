@@ -12,12 +12,12 @@
   <body class="bg-primary-light">
     <div class="d-flex flex-column container-fluid">
       <%# Header%>
-      <%= render "shared/header" %>
+      <%= render 'header' %>
       <%# content %>
       <main style="{flex: 1 0 auto;}">
         <div class="row">
           <div class="col-12 col-lg-3 px-0">
-            <%= render('/shared/sidebar') if @category.nil? == false %>
+            <%= render('sidebar') if @category.nil? == false %>
           </div>
           <div class="col-9">
             <% flash.each do |key, value| %>
@@ -31,7 +31,7 @@
       </main>
       <%# footer  %>
       <div class="container">
-        <%= render('/shared/footer')%>
+        <%= render('footer')%>
       </div>
     </div>
   </body>

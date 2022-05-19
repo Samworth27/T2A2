@@ -6,6 +6,6 @@ class ListingsController < ApplicationController
   def show
     @message = Message.new
     @listing = Listing.find(params[:id])
-    @category = @listing.item.category
+    @category = @listing.category
   end
 end

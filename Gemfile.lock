@@ -82,6 +82,8 @@ GEM
     administrate-field-active_storage (0.4.1)
       administrate (>= 0.2.2)
       rails (>= 7.0)
+    ancestry (4.1.0)
+      activerecord (>= 5.2.6)
     appmap (0.83.1)
       activesupport
       method_source
@@ -324,6 +326,7 @@ DEPENDENCIES
   addressing (~> 0.3.1)
   administrate
   administrate-field-active_storage (~> 0.4.1)
+  ancestry (~> 4.1)
   appmap
   bootsnap
   capybara

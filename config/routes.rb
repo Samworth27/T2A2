@@ -4,13 +4,10 @@ Rails.application.routes.draw do
   # Admin Dashboard
   namespace :admin do
     resources :categories
-    resources :items
     resources :listings
     resources :users
     resources :profiles
     resources :roles
-    resources :active_storage_blobs
-    resources :active_storage_attachments
     resources :measurements
     root to: 'categories#index'
   end

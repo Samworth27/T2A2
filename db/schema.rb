@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_19_001449) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_19_091934) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,12 +44,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_001449) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "display"
     t.string "slug"
-    t.index ["category_id"], name: "index_categories_on_category_id"
+    t.string "ancestry"
+    t.string "plural"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
@@ -71,17 +71,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_001449) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
     t.string "plural"
-    t.index ["category_id"], name: "index_items_on_category_id"
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_items_on_ancestry"
     t.index ["slug"], name: "index_items_on_slug", unique: true
   end
 
   create_table "listings", force: :cascade do |t|
-    t.bigint "item_id", null: false
+    t.bigint "category_id", null: false
     t.bigint "user_id", null: false
     t.float "quantity"
     t.bigint "measurement_id", null: false
@@ -90,7 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_001449) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "headline"
-    t.index ["item_id"], name: "index_listings_on_item_id"
+    t.index ["category_id"], name: "index_listings_on_category_id"
     t.index ["measurement_id"], name: "index_listings_on_measurement_id"
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
@@ -188,9 +188,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_001449) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "categories", "categories"
-  add_foreign_key "items", "categories"
-  add_foreign_key "listings", "items"
+  add_foreign_key "listings", "categories"
   add_foreign_key "listings", "measurements"
   add_foreign_key "listings", "users"
   add_foreign_key "messages", "conversations"

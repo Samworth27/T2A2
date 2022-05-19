@@ -1,4 +1,0 @@
-<h1 class="text-secondary">This is the Moderator page</h1>
-<%if user_signed_in? %>
-  User signed and has the roles <%= current_user.roles.map{|role| role.name}%>
-<% end%>

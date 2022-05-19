@@ -15,28 +15,30 @@
           </div>
         </div>
       </div>
-      <div class="list-group-item list-group-item-primary">
-      <h5>Send <%= @profile.display_name.capitalize %> a message</h5>
-        <%= form_with(model: @message, url: messages_new_path) do |form| %>
-          <div class="row w-100 pt-3">
-            <div class="col-9 form-floating text-dark">
-              <% invalid = @message.errors.include?('body') %>
-              <%= form.text_area :body, class:"w-100 form-control #{'is-invalid' if invalid}" %>
-              <div class="form-text invalid-feedback">
-                <% @message.errors.full_messages_for('body').each do |message| %>
-                  <%= message %>
-                <% end %>
+      <% unless @profile.user == current_user %>
+        <div class="list-group-item list-group-item-primary">
+          <h5>Send <%= @profile.display_name.capitalize %> a message</h5>
+          <%= form_with(model: @message, url: messages_new_path) do |form| %>
+            <div class="row w-100 pt-3">
+              <div class="col-9 form-floating text-dark">
+                <% invalid = @message.errors.include?('body') %>
+                <%= form.text_area :body, class:"w-100 form-control #{'is-invalid' if invalid}" %>
+                <div class="form-text invalid-feedback">
+                  <% @message.errors.full_messages_for('body').each do |message| %>
+                    <%= message %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-3">
+                <%= form.hidden_field :recipient, value: @profile.user.id %>
+                <%= form.submit 'Send Message', class:'form-control' %>
               </div>
             </div>
-            <div class="col-3">
-              <%= form.hidden_field :recipient, value: @profile.user.id %>
-              <%= form.submit 'Send Message', class:'form-control' %>
-            </div>
-          </div>
+          <% end %>
         </div>
       <% end %>
+      <hr>
+      <%= link_to 'Back', :back %>
     </div>
-    <hr>
-    <%= link_to 'Back', :back %>
   </div>
 </div>

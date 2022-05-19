@@ -45,9 +45,8 @@ class RoleDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    users
-    resource
     name
+    users
   ].freeze
 
   # COLLECTION_FILTERS

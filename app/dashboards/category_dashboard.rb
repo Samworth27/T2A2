@@ -10,16 +10,16 @@ class CategoryDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    children: Field::HasMany,
-    parent: Field::BelongsTo,
-    items: Field::HasMany,
     id: Field::Number,
     name: Field::String,
-    category_id: Field::Number,
+    plural: Field::String,
+    slug: Field::String,
+    image_attachment: Field::HasOne,
+    image_blob: Field::HasOne,
+    listings: Field::HasMany,
+    ancestry: Field::Select.with_options(collection: Category.all.map do |cat| [cat.name, cat.id] end),
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    display: Field::String,
-    slug: Field::String
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -30,37 +30,29 @@ class CategoryDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     name
-    parent
-    children
-    items
+    ancestry
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    children
-    parent
-    items
     id
     name
-    category_id
+    plural
+    slug
+    ancestry
     created_at
     updated_at
-    display
-    slug
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    children
-    parent
-    items
     name
-    category_id
-    display
+    plural
     slug
+    ancestry
   ].freeze
 
   # COLLECTION_FILTERS

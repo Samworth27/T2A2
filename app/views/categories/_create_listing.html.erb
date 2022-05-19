@@ -1,0 +1,15 @@
+<div class="col">
+  <div id="<%= dom_id item%>" class='card border-dark border-5 bg-primary bg-gradient h-100'>
+
+    <%= cl_image_tag(item.image.key ,aspect_ratio:1.0, width:330, crop: :fill, class:'card-img-top rounded-pill border border-dark border-5')  %>
+    <%# <div class="card-content ratio ratio-21x9">
+         
+    </div> %>
+    <div class="card-footer ratio ratio-superwide">
+      <%=  link_to(
+           tag.h4('Create a Listing'),
+           new_trader_listing_path,
+           class:"btn btn-primary") %>
+    </div>
+  </div>
+</div>
