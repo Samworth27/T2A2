@@ -3,9 +3,6 @@
     <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
       <h1 class="display-4 fw-bold lh-1">Search Through Categories</h1>
       <p class="lead">See whats on offer</p>
-      <%if user_signed_in? %>
-        <p class="lead">User signed and has the roles <%= current_user.roles.map{|role| role.name}%></p>
-      <% end%>
     </div>
     <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
       <%= image_tag('Market_Stall.jpg', class:"rounded-lg-3", width:'720') %>

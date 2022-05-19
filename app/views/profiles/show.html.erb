@@ -1,5 +1,5 @@
 <div class="container my-5 ">
-  <div class="rounded-3 p-4 border shadow-lg bg-primary-dark text-secondary">
+  <div class="row p-4 align-items-center rounded-3 border shadow-lg bg-primary-dark text-secondary">
     <h1 class="text-secondary"><%= @profile.display_name %> </h1>
     <hr>
     <div class="list-group-flush">
@@ -38,7 +38,7 @@
         </div>
       <% end %>
       <hr>
-      <%= link_to 'Back', :back %>
+      <%= link_to 'Back', :back, class:'btn btn-outline-secondary' %>
     </div>
   </div>
 </div>

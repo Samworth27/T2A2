@@ -1,67 +1,70 @@
-<div class="container border border-primary mt-3 p-3">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <% invalid = resource.errors.include?(:email) %>
-    <div class="form-floating mb-3">
-      <% edit_password = false%>
-      <% if edit_password == true %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control #{'is-invalid' if invalid}" %>
-        <%= f.label :email %>
+<div class="container my-5 ">
+  <div class="row p-4 align-items-center rounded-3 border shadow-lg bg-primary-dark text-secondary">
+    <h2>Change Password</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <% invalid = resource.errors.include?(:email) %>
+      <div class="form-floating mb-3">
+        <% edit_email = false%>
+        <% if edit_email == true %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control #{'is-invalid' if invalid}" %>
+          <%= f.label :email, class:"text-dark small"%>
+          <% if invalid %>
+            <div class="form-text invalid-feedback">
+              <% resource.errors.full_messages_for(:email).each do |message| %>
+                <%= message %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div class="form-text">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+      <% end %>
+      <% invalid = resource.errors.include?(:password) %>
+      <div class="form-floating mb-3">
+        <%= f.password_field :password, autocomplete: "new-password", class:"form-control #{'is-invalid' if invalid}" %>
+        <%= f.label :password, class:"text-dark small" %>
+        <% if Devise.password_length.min && invalid == false %>
+          <div class="form-text"><%= Devise.password_length.min %> characters minimum</div>
+        <% end %>
         <% if invalid %>
           <div class="form-text invalid-feedback">
-            <% resource.errors.full_messages_for(:email).each do |message| %>
+            <% resource.errors.full_messages_for(:password).each do |message| %>
               <%= message %>
             <% end %>
           </div>
         <% end %>
       </div>
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div class="form-text">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
+      <% invalid = resource.errors.include?(:password_confirmation) %>
+      <div class="form-floating mb-3">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control #{'is-invalid' if invalid}" %>
+        <%= f.label :password_confirmation, class:"text-dark small" %>
+        <% if invalid %>
+          <div class="form-text invalid-feedback">
+            <% resource.errors.full_messages_for(:password_confirmation).each do |message| %>
+              <%= message %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <% invalid = resource.errors.include?(:password_confirmation) %>
+      <div class="form-floating mb-3">
+        <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control #{'is-invalid' if invalid}" %>
+        <%= f.label :current_password , class:"text-dark small"%>
+        <div class="form-text">(we need your current password to confirm your changes)</div>
+        <% if invalid %>
+          <div class="form-text invalid-feedback">
+            <% resource.errors.full_messages_for(:password_confirmation).each do |message| %>
+              <%= message %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="w-50">
+        <%= f.submit "Update", class:"btn btn-primary btn-outline-secondary" %>
+        <%= link_to "Back", manage_profile_path, class:"btn btn-primary btn-outline-secondary" %>
+      </div>
     <% end %>
-    <% invalid = resource.errors.include?(:password) %>
-    <div class="form-floating mb-3">
-      <%= f.password_field :password, autocomplete: "new-password", class:"form-control #{'is-invalid' if invalid}" %>
-      <%= f.label :password %>
-      <% if Devise.password_length.min && invalid == false %>
-        <div class="form-text"><%= Devise.password_length.min %> characters minimum</div>
-      <% end %>
-      <% if invalid %>
-        <div class="form-text invalid-feedback">
-          <% resource.errors.full_messages_for(:password).each do |message| %>
-            <%= message %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-    <% invalid = resource.errors.include?(:password_confirmation) %>
-    <div class="form-floating mb-3">
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control #{'is-invalid' if invalid}" %>
-      <%= f.label :password_confirmation %>
-      <% if invalid %>
-        <div class="form-text invalid-feedback">
-          <% resource.errors.full_messages_for(:password_confirmation).each do |message| %>
-            <%= message %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-    <% invalid = resource.errors.include?(:password_confirmation) %>
-    <div class="form-floating mb-3">
-      <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control #{'is-invalid' if invalid}" %>
-      <%= f.label :current_password %>
-      <div class="form-text">(we need your current password to confirm your changes)</div>
-      <% if invalid %>
-        <div class="form-text invalid-feedback">
-          <% resource.errors.full_messages_for(:password_confirmation).each do |message| %>
-            <%= message %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-    <div class="w-50">
-      <%= f.submit "Update", class:"form-control btn-primary" %>
-    </div>
-  <% end %>
-  
-  <%= link_to "Back", manage_profile_path %>
+    
+  </div>
 </div>

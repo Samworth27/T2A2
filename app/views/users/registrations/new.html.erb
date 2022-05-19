@@ -1,27 +1,48 @@
-<div class = "container px-5 my-5">
-  <h2>Sign up</h2>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <div class="form-floating mb-3">    
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
-      <%= f.label :email %>
-    </div>
-    <div class="form-floating mb-3">
-      
-      
-      <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-        <div class= "form-text">(<%= @minimum_password_length %> characters minimum)</div>
-      <% end %>
-    </div>
-    <div class="form-floating mb-3">
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
-      <%= f.label :password_confirmation %>
-    </div>
-    <div class="actions">
-      <%= f.submit "Sign up" %>
-    </div>
-  <% end %>
-  <%= render "devise/shared/links" %>
+<div class="container my-5 ">
+  <div class="row p-4 align-items-center rounded-3 border shadow-lg bg-primary-dark text-secondary">
+    <h2>Sign up</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <% invalid = resource.errors.include?(:email) %>
+      <div class="form-floating mb-3">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control #{'is-invalid' if invalid}" %>
+        <%= f.label :email, class:"text-dark small" %>
+        <% if invalid %>
+          <div class="form-text invalid-feedback">
+            <% resource.errors.full_messages_for(:email).each do |message| %>
+              <%= message %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <% invalid = resource.errors.include?(:password) %>
+      <div class="form-floating mb-3">
+        <%= f.password_field :password, autocomplete: "new-password", class:"form-control #{'is-invalid' if invalid}" %>
+        <%= f.label :password, class:"text-dark small" %>
+        <% if invalid %>
+          <div class="form-text invalid-feedback">
+            <% resource.errors.full_messages_for(:password).each do |message| %>
+              <%= message %>
+            <% end %>
+          </div>
+        <% elsif @minimum_password_length %>
+          <div class= "form-text">(<%= @minimum_password_length %> characters minimum)</div>
+        <% end %>
+      </div>
+      <% invalid = resource.errors.include?(:password_confirmation) %>
+      <div class="form-floating mb-3">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control #{'is-invalid' if invalid}" %>
+        <%= f.label :password_confirmation, class:"text-dark small" %>
+        <% if invalid %>
+          <div class="form-text invalid-feedback">
+            <% resource.errors.full_messages_for(:password_confirmation).each do |message| %>
+              <%= message %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Sign up", class:"btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
 </div>

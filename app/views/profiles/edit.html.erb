@@ -1,11 +1,15 @@
-<div class="container border border-primary mt-3 p-3">
-  <h1 class="text-secondary">Edit your profile</h1>
-  <%= render "profiles/profile", profile: @profile %>
+<div class="container my-5 ">
+  <div class="row p-4 align-items-center rounded-3 border shadow-lg bg-primary-dark text-secondary">
+    <div class="container border border-primary my-3 p-3">
+      <h1 class="text-secondary">Edit your profile</h1>
+      <%= render "profiles/profile", profile: @profile %>
+    </div>
+    <div class="container border border-primary my-3 p-3">
+      <h2>Manage Account</h2>
+      <%= link_to 'Change Password', edit_registration_path(resource), class:"btn btn-primary" %>
+      <%= link_to "Cancel my account", registration_path(resource_name), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary" %>
+    </div>
+    <%= link_to "Back", :back %>
+    <br>
+  </div>
 </div>
-<div class="container border border-primary my-3 p-3">
-  <h2>Manage Account</h2>
-  <%= link_to 'Change Password', edit_registration_path(resource), class:"btn btn-primary" %>
-  <%= link_to "Cancel my account", registration_path(resource_name), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary" %>
-</div>
-<%= link_to "Back", :back %>
-<br>
