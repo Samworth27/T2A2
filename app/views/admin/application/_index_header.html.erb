@@ -1,0 +1,28 @@
+<% content_for(:title) do %>
+  <%= display_resource_name(page.resource_name) %>
+<% end %>
+<header class="row mt-3" role="banner">
+  <h1 class="col" id="page-title">
+    <%= content_for(:title) %>
+  </h1>
+  <div class="col">
+    <% if show_search_bar %>
+      <%= render(
+      "search",
+      search_term: search_term,
+      resource_name: display_resource_name(page.resource_name),
+      class: 'col'
+    ) %>
+    <% end %>
+  </div>
+  <div class="col">
+    <%= link_to(
+      t(
+        "administrate.actions.new_resource",
+        name: display_resource_name(page.resource_name, singular: true).downcase
+      ),
+      [:new, namespace, page.resource_path.to_sym],
+      class: "btn btn-primary",
+    ) if valid_action?(:new) && show_action?(:new, new_resource) %>
+  </div>
+</header>

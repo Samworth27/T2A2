@@ -68,18 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_091934) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
-
-  create_table "items", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "slug"
-    t.string "plural"
-    t.string "ancestry"
-    t.index ["ancestry"], name: "index_items_on_ancestry"
-    t.index ["slug"], name: "index_items_on_slug", unique: true
-  end
-
+  
   create_table "listings", force: :cascade do |t|
     t.bigint "category_id", null: false
     t.bigint "user_id", null: false
@@ -139,11 +128,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_091934) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
-  end
-
-  create_table "scaffolds", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "user_conversations", force: :cascade do |t|

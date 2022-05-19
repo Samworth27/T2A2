@@ -4,7 +4,7 @@
       Conversation with <%= @conversation.other_user(current_user).profile.display_name %>
     </h1>
     <p class="lead">
-      <%= @conversation.last_message_dtg.getlocal.strftime("Last Message %r %F") %>
+      <%= @conversation.last_message_dtg.getlocal.strftime("Last Message %r %F") unless @conversation.messages.empty? %>
     </p>
     <div class="bg-primary-light text-black w-100">
       <div class="message-container" id="message_container">

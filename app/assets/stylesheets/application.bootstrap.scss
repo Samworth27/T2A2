@@ -136,6 +136,7 @@ $aspect-ratios: map-merge($aspect-ratios, $custom-ratios);
 @import "bootstrap/scss/grid";
 @import "bootstrap/scss/helpers";
 
+@import "bootstrap/scss/tables";
 @import "bootstrap/scss/card";
 @import "bootstrap/scss/list-group";
 @import "bootstrap/scss/nav";
