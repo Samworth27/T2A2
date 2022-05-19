@@ -167,3 +167,7 @@ $aspect-ratios: map-merge($aspect-ratios, $custom-ratios);
   max-height: 40vh !important;
   overflow-y: scroll !important;
 }
+
+body {
+  min-height: 100vh !important;
+}

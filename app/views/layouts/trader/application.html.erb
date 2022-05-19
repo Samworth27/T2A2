@@ -30,19 +30,13 @@ By default, it renders:
     <%= render "icons" %>
     <div class="d-flex flex-column container-fluid">
       <%# Header%>
-      
-          <%= render "/shared/header" %>
-
-
-      
+      <%= render "/shared/header" %>
       <div style="{flex: 1 0 auto;}">
         <div class="row">
-
           <%# Sidebar %>
           <div class="col-12 col-lg-3 px-0">
             <%= render('navigation')%>
           </div>
-
           <%# content %>
           <main class="col-9">
             <!--<% flash.each do |key, value| %>
@@ -55,19 +49,9 @@ By default, it renders:
           </main>
         </div>
       </div>
-
       <%# footer  %>
       <div class="container">
-        <footer class="py-3 my-4">
-          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-          </ul>
-          <p class="text-center text-muted">&copy; 2021 Company, Inc</p>
-        </footer>
+        <%= render('/shared/footer')%>
       </div>
     </div>
     <%= render "javascript" %>
