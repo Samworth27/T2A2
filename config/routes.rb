@@ -34,15 +34,12 @@ Rails.application.routes.draw do
   end
 
   get 'users', to: 'profiles#edit'
-  
-  resolve("Profile") { [:profile] }
 
   scope '/view' do
     get '/categories/root', to: redirect('view/categories')
     get '/categories/:id', to: 'categories#show', as: :category
     get '/categories/:cat_id/:id', to: 'items#show', as: :item
     resources :categories
-    resources :items
     resources :listings
     root to: 'categories#index', as: :view
     get '/profile/:id', to: 'profile#show'
@@ -52,7 +49,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  get '/moderator', to: 'static_pages#moderator', as: :moderator_root
+  # get '/moderator', to: 'static_pages#moderator', as: :moderator_root
+
+  get '/faq', to: 'static_pages#faq', as: :faq
+  get '/about', to: 'static_pages#about', as: :about
 
   root 'static_pages#index'
 end
