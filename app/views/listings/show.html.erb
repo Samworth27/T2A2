@@ -2,12 +2,29 @@
   <div class="rounded-3 p-4 border shadow-lg bg-primary-dark text-secondary">
     <h1 class="text-secondary"><%= @listing.headline %> </h1>
     <hr>
-    <%= "#{@listing.quantity} #{@measurement} of #{@name}" %>
-    <%# <%= cl_image_tag(item.image.key,aspect_ratio:1.0, width:330, crop: :fill, class:'card-img-top rounded-pill border border-dark border-5') if item.image.attached? %>
+    <%= "#{@listing.quantity} #{@listing.measurement_display} of #{@listing.item_name}" %>
+    <%= form_with(model: @message, url: messages_new_path) do |form| %>
+      <div class="row w-100 pt-3">
+        <div class="col-9 form-floating text-dark">
+          <% invalid = @message.errors.include?('body') %>
+          <%= form.text_area :body, class:"w-100 form-control #{'is-invalid' if invalid}" %>
+          <div class="form-text invalid-feedback">
+            <% @message.errors.full_messages_for('body').each do |message| %>
+              <%= message %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-3">
+          <%= form.hidden_field :listing, value: @listing.id%>
+          <%= form.hidden_field :recipient, value: @listing.owner.id %>
+          <%= form.submit 'Send Message', class:'form-control' %>
+        </div>
+      </div>
+    <% end %>
     <%# <div class="card-content ratio ratio-21x9">
          
     </div> %>
     <hr>
-    <%= link_to "Return to #{@item.plural}", item_path(@category,@item), class:"text-secondary" %>
+    <%= link_to "Return to #{@listing.item.plural}", item_path(@listing.item.category,@listing.item), class:"text-secondary" %>
   </div>
 </div>

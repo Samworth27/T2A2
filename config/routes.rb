@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   namespace :messages do
     post '/new', to: 'messages#create', as: :new
+    post '/reply', to: 'messages#reply', as: :reply
     get 'conversation/:id', to: 'conversations#show', as: :conversation
     root to: 'conversations#index'
   end

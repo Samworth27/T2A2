@@ -1,33 +1,54 @@
 <div class="container my-5">
   <div class="rounded-3 p-4 border shadow-lg bg-primary-dark text-secondary">
-    <%# turbo_frame_tag 'conversation' do %>
-      <h1>Conversation with <%= @conversation.other_user(current_user).email %></h1>
-      <p class="lead"><%= @conversation.last_message_dtg.getlocal.strftime("Last Message %r %F") %></p>
-      <div class="bg-primary-light text-black w-100">
-        <div class="message-container" id="message_container">
-          <% @conversation.messages.each do |message| %>
-            <div class="row m-0 <%= 'justify-content-end' if message.sender == current_user%>">
-              <div class="position-relativeborder border-dark rounded shadow bg-light my-2 mx-3 p-2 col-6 <%# 'text-end' if message.sender == current_user%>">
-                <div class="text-muted"> <%= message.sender == current_user ? 'You' : 'Them' %> </div>
-                <div class="container text-break"><%= message.body %></div>
-                <div class="small text-end text-muted fw-lighter"> <%= message.created_at.getlocal.strftime("%r %F")%></div>
+    <h1>
+      Conversation with <%= @conversation.other_user(current_user).email %>
+    </h1>
+    <p class="lead">
+      <%= @conversation.last_message_dtg.getlocal.strftime("Last Message %r %F") %>
+    </p>
+    <div class="bg-primary-light text-black w-100">
+      <div class="message-container" id="message_container">
+        <% @conversation.messages.each do |message| %>
+          <div class="row m-0 <%= 'justify-content-end' if message.sender == current_user%>">
+            <div class="list-group-flush position-relativeborder border-dark rounded shadow bg-light my-2 mx-3 p-2 col-6 <%# 'text-end' if message.sender == current_user%>">
+              <% unless message.listing.nil?%>
+                <div class="list-group-item bg-light">
+                  This is a message about the listing: <%= link_to message.listing.headline, message.listing %>
+                </div>
+              <% end %>
+              <div class="list-group-item bg-light">
+                <div class="text-muted">
+                  <%= message.sender == current_user ? 'You' : 'Them' %>
+                </div>
+                <div class="container text-break">
+                  <%= message.body %>
+                </div>
+                <div class="small text-end text-muted fw-lighter">
+                  <%= message.created_at.getlocal.strftime("%r %F")%>
+                </div>
               </div>
             </div>
-          <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <%= form_with(model: @message, url: messages_reply_path) do |form| %>
+      <div class="row w-100 pt-3">
+        <div class="col-9 form-floating text-dark">
+          <% invalid = @message.errors.include?('body') %>
+          <%= form.text_area :body, class:"w-100 form-control #{'is-invalid' if invalid}" %>
+          <div class="form-text invalid-feedback">
+            <% @message.errors.full_messages_for('body').each do |message| %>
+              <%= message %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-3">
+          <%= form.hidden_field :recipient, value: @conversation.other_user(current_user).id %>
+          <%= form.submit 'Send Message', class:'form-control' %>
         </div>
       </div>
-      <%= form_with(model: Message.new, url: messages_new_path) do |form| %>
-        <div class="row w-100 pt-3">
-          <div class="col-9 form-floating text-dark">
-            <%= form.text_area :body, class:'w-100 form-control' %>
-          </div>
-          <div class="col-3">
-            <%= form.hidden_field :recipient, value: @conversation.other_user(current_user).id %>
-            <%= form.submit 'Send Message', class:'form-control' %>
-          </div>
-        </div>
-      <% end %>
-    <%# end %>
+    <% end %>
     <script type="text/javascript">
       document.addEventListener('turbo:render', scrollBottom)
       document.addEventListener('DOMContentLoaded', scrollBottom)
@@ -37,3 +58,4 @@
       };
     </script>
   </div>
+</div>
