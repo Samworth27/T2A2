@@ -5,5 +5,3 @@ import * as bootstrap from "bootstrap"
 
 import * as ActiveStorage from "@rails/activestorage"
 ActiveStorage.start()
-
-// import './custom/layout'
