@@ -1,7 +1,7 @@
 <div class="container my-5">
   <div class="rounded-3 p-4 border shadow-lg bg-primary-dark text-secondary">
     <h1>
-      Conversation with <%= @conversation.other_user(current_user).email %>
+      Conversation with <%= @conversation.other_user(current_user).profile.display_name %>
     </h1>
     <p class="lead">
       <%= @conversation.last_message_dtg.getlocal.strftime("Last Message %r %F") %>
@@ -10,7 +10,7 @@
       <div class="message-container" id="message_container">
         <% @conversation.messages.each do |message| %>
           <div class="row m-0 <%= 'justify-content-end' if message.sender == current_user%>">
-            <div class="list-group-flush position-relativeborder border-dark rounded shadow bg-light my-2 mx-3 p-2 col-6 <%# 'text-end' if message.sender == current_user%>">
+            <div class="list-group-flush position-relativeborder border-dark rounded shadow bg-light my-2 mx-3 p-2 col-6">
               <% unless message.listing.nil?%>
                 <div class="list-group-item bg-light">
                   This is a message about the listing: <%= link_to message.listing.headline, message.listing %>
@@ -18,7 +18,7 @@
               <% end %>
               <div class="list-group-item bg-light">
                 <div class="text-muted">
-                  <%= message.sender == current_user ? 'You' : 'Them' %>
+                  <%= message.sender == current_user ? 'You' : message.sender.profile.display_name.capitalize %>
                 </div>
                 <div class="container text-break">
                   <%= message.body %>

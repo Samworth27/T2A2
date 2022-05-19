@@ -1,3 +1,42 @@
-<h1 class="text-secondary">Profile#view</h1>
-<p>Find me in app/views/profile/view.html.erb</p>
-<%= @profile %>
+<div class="container my-5 ">
+  <div class="rounded-3 p-4 border shadow-lg bg-primary-dark text-secondary">
+    <h1 class="text-secondary"><%= @profile.display_name %> </h1>
+    <hr>
+    <div class="list-group-flush">
+      <div class="list-group-item list-group-item-primary">
+        <div class="row">
+          <div class="col-3">
+            <h5>Name</h5>
+            <%= @profile.display_name.capitalize %>
+          </div>
+          <div class="col-3">
+            <h5>Location</h5>
+            <%= "#{@profile.suburb}, #{@profile.state}" %>
+          </div>
+        </div>
+      </div>
+      <div class="list-group-item list-group-item-primary">
+      <h5>Send <%= @profile.display_name.capitalize %> a message</h5>
+        <%= form_with(model: @message, url: messages_new_path) do |form| %>
+          <div class="row w-100 pt-3">
+            <div class="col-9 form-floating text-dark">
+              <% invalid = @message.errors.include?('body') %>
+              <%= form.text_area :body, class:"w-100 form-control #{'is-invalid' if invalid}" %>
+              <div class="form-text invalid-feedback">
+                <% @message.errors.full_messages_for('body').each do |message| %>
+                  <%= message %>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-3">
+              <%= form.hidden_field :recipient, value: @profile.user.id %>
+              <%= form.submit 'Send Message', class:'form-control' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <hr>
+    <%= link_to 'Back', :back %>
+  </div>
+</div>

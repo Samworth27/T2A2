@@ -3,6 +3,9 @@
     Conversations
   </div>
   <% @conversations.each do |node| %>
-    <%= link_to(node.other_user(current_user).email, messages_conversation_path(node), data: {turbo_frame: 'conversation' }, class: "list-group-item list-group-item-action list-group-item-primary p-3 px-2 #{@conversation == node ? 'active' : ''}") %>
+    <%= link_to(node.other_user(current_user).profile.display_name.capitalize, 
+    messages_conversation_path(node), 
+    data: {turbo_frame: 'conversation' }, 
+    class: "list-group-item list-group-item-action list-group-item-primary p-3 px-2 #{@conversation == node ? 'active' : ''}") %>
   <% end %>
 </div>

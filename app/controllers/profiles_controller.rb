@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile, only: %i[show edit update destroy]
   def show
+    @message = Message.new
   end
 
   def edit
@@ -33,11 +34,11 @@ class ProfilesController < ApplicationController
   end
 
   def set_profile
-    if params[:id]
-      @profile = Profile.find(params[:id])
-    else
-      @profile = current_user.profile
-    end
+    @profile = if params[:id]
+                 Profile.find(params[:id])
+               else
+                 current_user.profile
+               end
   end
 
   def profile_params
