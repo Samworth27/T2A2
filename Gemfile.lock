@@ -68,7 +68,6 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
-    addressing (0.3.1)
     administrate (0.17.0)
       actionpack (>= 5.0)
       actionview (>= 5.0)
@@ -105,7 +104,6 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     childprocess (4.1.0)
-    choice (0.2.0)
     cloudinary (1.23.0)
       aws_cf_signer
       rest-client (>= 2.0.0)
@@ -134,7 +132,6 @@ GEM
       mime-types (>= 1.0)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
-    geocoder (1.7.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
     http-accept (1.7.0)
@@ -221,7 +218,6 @@ GEM
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    railroady (1.6.0)
     rails (7.0.2.4)
       actioncable (= 7.0.2.4)
       actionmailbox (= 7.0.2.4)
@@ -239,11 +235,6 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-erd (1.6.1)
-      activerecord (>= 4.2)
-      activesupport (>= 4.2)
-      choice (~> 0.2.0)
-      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
     railties (7.0.2.4)
@@ -269,8 +260,6 @@ GEM
       nokogiri
     rexml (3.2.5)
     rolify (6.0.0)
-    ruby-graphviz (1.2.5)
-      rexml
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyzip (2.3.2)
@@ -332,7 +321,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  addressing (~> 0.3.1)
   administrate
   administrate-field-active_storage (~> 0.4.1)
   ancestry (~> 4.1)
@@ -345,7 +333,6 @@ DEPENDENCIES
   devise (~> 4.8)
   file_validators (~> 3.0)
   friendly_id (~> 5.4)
-  geocoder (~> 1.7)
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
@@ -353,9 +340,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   pundit
-  railroady (~> 1.6)
   rails (~> 7.0.2, >= 7.0.2.4)
-  rails-erd (~> 1.6)
   rolify
   selenium-webdriver
   sprockets-rails
