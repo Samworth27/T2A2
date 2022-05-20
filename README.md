@@ -2,7 +2,8 @@
 
 ## R7 - ID the problem
 
-Someone who has an interest if sustainable living has grown an excess of a particular crop or something they have produced and would like to avoid wasting this excess while potentially also getting something that might need in return
+Someone who has an interest if sustainable living has grown an excess of a particular crop or something they have produced and would like to avoid wasting this excess while potentially also getting something that might need in return.
+While physical marketplaces exist as well as social media swap groups exists, people can be too busy to get to a physical market and social media swap groups can be fragmented, even in one city, meaning a person might have to advertise something in more than one place.
 
 ## R8 - Why does the problem need solving
 
@@ -179,7 +180,7 @@ The applications purpose is to provide a framework to enable users to barter and
   The admin dashboard is recreated with reduced scope for the management of a users listings.
 
 - Users and Profiles
-  User account information is stored separately from the profile information. This is mainly to create a separation of information between what is needed for authentication and authorisation and the profile information itself. A positive side effect of this is profile information is only ever called when explicitly needed. The amount of times the profile record needs to be requested could be reduced by caching the value of the users preferred display name in the user model and updating this value when the profile is modified.
+  User account information is stored separately from the profile information. This is mainly to create a separation of information between what is needed for authentication and authorisation and the profile information itself. A positive side effect of this is profile information is only ever called when explicitly needed. The amount of times the profile record needs to be requested could be reduced by caching the value of the users preferred display name in the user model and updating this value when the profile is modified. While this would mean that database is not completely normalized it could offer a performance improvement if the single value was being called often enough.
 
 ## R16 - Detail 3rd party APIs
 
@@ -188,6 +189,8 @@ The applications purpose is to provide a framework to enable users to barter and
 ## R17 - Describe 'model' relationships
 ![Model Relationships](docs/relations.svg)
 ## R18 - Discuss database relations
+
+![ERD](docs/erd.png)
 
 ## R19 - Provide database schema design
 

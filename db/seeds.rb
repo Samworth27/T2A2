@@ -34,7 +34,6 @@ end
 # Items
 
 def seed_items(seed_path, image_path)
-  Item.destroy_all
   items = read_seed_file(seed_path, :Items)
   items.each do |item|
     row = Category.friendly.find(item[:category]).children.create!(name: item[:name], plural: item[:plural])
