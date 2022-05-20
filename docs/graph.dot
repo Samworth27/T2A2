@@ -1,0 +1,101 @@
+graph {
+
+  overlap = scalexy
+  sep=0.1
+  node[width=2,height=1]
+
+  node [
+    shape=Rectangle
+    style=filled
+    fillcolor="#5394ca"
+    ];
+
+  User 
+  // [
+  //   shape = Mrecord;
+  //   label = "{
+  //     ACCOUNT|
+  //     <1>ID|
+  //     <2>Email
+  //   }";
+  // ]
+
+  Profile 
+  // [
+  //   shape = Mrecord;
+  //   label = "{
+  //     PROFILE|
+  //     Name|
+  //     Address
+  //   }"
+  // ]
+
+  Listing 
+  // [
+  //   shape = Mrecord
+  //   label="{
+  //     LISTING|
+  //     quantity|
+  //     description|
+  //     desired_trades|
+  //     start_time|
+  //     end_time
+  //   }"
+  // ]
+
+  Category 
+  // [
+  //   shape = Mrecord
+  //   label="{
+  //     CATEGORY
+  //   }"
+  // ]
+
+  Conversation 
+
+  Role
+
+  Message
+
+  Attachment
+
+  Measurement
+
+
+  //  Relationship nodes
+  node [
+    shape=diamond
+    fillcolor="#53af16"
+    ];
+  user_listing [label="Has A"];
+  user_profile [label = "Has A"]
+  user_role [label = "Has A"]
+  user_conversation [label = "Part of"]
+  listing_category [label="Type Of"];
+  category_category [label = "Child of"];
+  conversation_message [label = "Belongs to"]
+  message_user [label = "Sent By"]
+  message_listing [label = "Is About"]
+  attachment_listing [label = "Has An"]
+  attachment_category [label = "Has An"]
+  listing_measurement [label = "Uses"]
+
+
+  User -- user_profile -- Profile
+  User -- user_listing -- Listing
+  User -- user_conversation -- Conversation
+  User -- user_role -- Role
+  Listing -- listing_category -- Category
+  Category -- category_category -- Category
+  Conversation -- conversation_message -- Message
+  Message -- message_user -- User
+  Message -- message_listing -- Listing
+  Attachment -- attachment_category -- Category
+  Attachment -- attachment_listing -- Listing
+  Listing -- listing_measurement -- Measurement
+
+
+}
+// sfdp -Goverlap=prism -Tdot -o test.gv erd.dot
+// gvmap  -e test.gv | neato -Ecolor="#55555522" -n2 -Tpng > graph.png
+

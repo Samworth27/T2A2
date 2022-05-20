@@ -20,6 +20,6 @@ class Conversation < ApplicationRecord
   end
 
   def last_message_dtg
-    messages.last.created_at
+    messages.empty? ? self.destroy : messages.last.created_at
   end
 end
