@@ -16,6 +16,7 @@ class ListingDashboard < Administrate::BaseDashboard
     measurement: Field::BelongsTo,
     id: Field::Number,
     quantity: Field::Number.with_options(decimals: 2),
+    image: Field::ActiveStorage,
     start_dtg: Field::Date,
     finish_dtg: Field::Date,
     created_at: Field::DateTime,
@@ -38,6 +39,7 @@ class ListingDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     headline
+    image
     category
     quantity
     measurement
@@ -53,6 +55,7 @@ class ListingDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     headline
+    image
     category
     quantity
     measurement

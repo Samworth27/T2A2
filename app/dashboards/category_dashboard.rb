@@ -14,8 +14,7 @@ class CategoryDashboard < Administrate::BaseDashboard
     name: Field::String,
     plural: Field::String,
     slug: Field::String,
-    image_attachment: Field::HasOne,
-    image_blob: Field::HasOne,
+    image: Field::ActiveStorage,
     listings: Field::HasMany,
     ancestry: Field::Select.with_options(collection: Category.all.map do |cat| [cat.name, cat.id] end),
     created_at: Field::DateTime,
@@ -40,6 +39,7 @@ class CategoryDashboard < Administrate::BaseDashboard
     name
     plural
     slug
+    image
     ancestry
     created_at
     updated_at
@@ -52,6 +52,7 @@ class CategoryDashboard < Administrate::BaseDashboard
     name
     plural
     slug
+    image
     ancestry
   ].freeze
 
