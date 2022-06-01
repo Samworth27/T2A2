@@ -182,15 +182,184 @@ The applications purpose is to provide a framework to enable users to barter and
 - Users and Profiles
   User account information is stored separately from the profile information. This is mainly to create a separation of information between what is needed for authentication and authorisation and the profile information itself. A positive side effect of this is profile information is only ever called when explicitly needed. The amount of times the profile record needs to be requested could be reduced by caching the value of the users preferred display name in the user model and updating this value when the profile is modified. While this would mean that database is not completely normalized it could offer a performance improvement if the single value was being called often enough.
 
-## R16 - Detail 3rd party APIs
+## R16 - Detail 3rd party services
 
-- No third party APIs where used
+### Heroku
+
+The application is being hosted on Heroku to take advantage of the Heroku CLI. This means that the cloud application can be controlled through an authorised terminal through rake tasks, this includes database migrations and seeding most importantly.
+
+### Cloudinary
+
+Cloudinary is used to provide cloud image hosting functionality for the application. This is required as Heroku resets the uploaded repository every 24 hours therefore deleting any uploaded files.
+The Cloudinary API is accessed through the Cloudinary gem.
 
 ## R17 - Describe 'model' relationships
+
 ![Model Relationships](docs/relations.svg)
+
+### The User
+
+#### User Roles
+
+```ruby
+has_many :users_role
+has_many :roles, through: :users_role
+```
+
+Using the 'Rolify' Gem, a User can have many roles through the users_role table.
+
+#### User Profiles
+
+```ruby
+has_one :profile
+```
+
+The decision was made to separate a User account from their profile. This was done to simply making changes to the way users are managed without destroying information regarding a profile. It also means profile information is not called when not required, eg, for authentication purposes.
+
+#### User Conversations and Messages
+
+```ruby
+has_many :user_conversations
+has_many :conversations, through: :user_conversations
+has_many :messages
+```
+
+A User can have many Conversations however there can only be one Conversation between any two Users.
+A User can have many Messages however a message can only have one User as its Sender.
+
+### Listings
+
+#### Its Category
+
+```ruby
+  belongs_to :category
+```
+
+The category the listing falls under. Can only have one category currently.
+
+#### Its Owner
+
+```ruby
+  belongs_to :owner, class_name: 'User', foreign_key: 'user_id'
+```
+
+The user who created the listing, a listing can only have one owner.
+
+#### Measurement System
+
+```ruby
+  belongs_to :measurement
+```
+
+A system to classify the units of measurement was created to allow the quantification of trades. A listing can have only one measurement.
+
+#### Messages
+
+```ruby
+has_many :messages
+```
+
+When a message is sent from a listing's page this information is stored in the Message record. A listing can have many associated messages.
+
+#### Attachments
+
+```ruby
+  has_one_attached :image
+```
+
+A listing can have a single image attached for display purposes.
+
+### Conversations
+
+```ruby
+  has_many :user_conversations
+  has_many :users, through: :user_conversations
+  has_many :messages
+```
+
+The messaging system was built to be robust and allow for future development. A user is joined to a conversation though the user_conversations join table. This allows a conversation to have more than 2 users, although the current implementation only allows for one conversation between two users and only two users to a conversation.
+Possible extensions of this would include a bulletin board, or group messaging system, commenting on listings or profiles, etc. 
+A user can have many messages and this is recorded through a primary key field in the message record.
+
+### Categories
+
+```ruby
+  has_one_attached :image
+
+```
+
+A Category can have one image attached for display purposes.
+
+```ruby
+  has_many :listings
+```
+
+A Category can have many listings associated with it, this is to enable selection of many listings by Category. 
+
+#### Category Ancestry
+
+A Category can have have a single Parent and many Children. This relationship forms a graph tree of Categories and also allows for other relationships to be derived such as Siblings, Ancestors, Descendants and any related (belonging to the same tree).
+If a Category does not have a Parent then it forms the root node for its own tree.
+
 ## R18 - Discuss database relations
 
 ![ERD](docs/erd.png)
+
+### Users
+
+- 1-1 Profile
+- 1-m UserRoles
+- 1-m UserConversations
+- 1-m Messages
+- 1-m Listings
+
+### Profiles
+
+- 1-1 User
+
+### Roles
+
+- 1-m UserRoles
+
+### Conversations
+
+- 1-m UserConversations
+- 1-m Messages
+
+### Messages
+
+- 1-1 Users
+- 1-1 Listings (optional)
+- 1-1 Conversations
+
+### Listings
+
+- 1-1 Categories
+- 1-1 Users
+- 1-1 ActiveStorageAttachments
+- 1-1 Measurements
+
+### Categories
+
+- 1-m Listings
+- 1-1 ActiveStorageAttachments
+
+### ActiveStorageAttachments
+
+Acts as a polymorphic join table between ActiveStorageBlobs and Listings or Categories
+
+- 1-1 Polymorphic with either Listings or Categories
+- 1-1 ActiveStorageBlobs
+
+### Other Join Tables
+
+- UserRoles
+- UserConversations
+  
+### Measurements
+
+- 1-m Listings
+
 
 ## R19 - Provide database schema design
 
@@ -384,5 +553,15 @@ end
 
 ## R20 - Describe the way tasks are allocated and tracked in the project
 
-Github projects was used to manage tasks in the project as it directly integrates with the git repo while still providing ability to use kanban boards
+Github projects was used to manage tasks in the project as it directly integrates with the Github repository while still providing ability to use kanban boards if wanted.
+
+- [ ] Tasks are created in the project, and are converted into issues for the repository.
+  - [ ] Larger tasks are then broken down into smaller tasks which are then have their own issues raised in the repository.
+    - [x] This is repeated until the tasks are small and easily defined.
+    - [x] The sub tasks are tracked in the parent issue using markdown checkboxes and a link to the child tasks.
+    - [ ] #13
+  - [ ] Github handles all of the links and updating of checkboxes in house.
+
+
+
 [Application Project](https://github.com/users/Samworth27/projects/3/views/1)

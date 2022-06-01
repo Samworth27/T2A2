@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :user_conversations, dependent: :destroy
   has_many :conversations, through: :user_conversations, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :listings
 
   def export
     super(%i[email encrypted_password])
