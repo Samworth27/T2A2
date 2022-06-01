@@ -307,6 +307,10 @@ If a Category does not have a Parent then it forms the root node for its own tre
 
 ### Users
 
+A user can have only one profile, however can have many roles, conversations, messages and listings.
+Because a roles and conversations can also belong to many users, join tables are used for these associations.
+The associations for the messages, listings and profiles are stored as Foreign Key of the User ID in the relevant table.
+
 - 1-1 Profile
 - 1-m UserRoles
 - 1-m UserConversations
@@ -315,24 +319,40 @@ If a Category does not have a Parent then it forms the root node for its own tre
 
 ### Profiles
 
+A profile can only belong to a single user
+The association is stored as a Foreign Key of the User ID in this table.
+
 - 1-1 User
 
 ### Roles
 
+Roles can belong to many users. Because many users can have the same role the association is stored in a join table.
+
 - 1-m UserRoles
 
 ### Conversations
+
+Conversations can have many users and messages.
+Because many users can belong to the same conversation and a single user can belong to many conversations a join table is used to store the association.
+
+Because a message can only belong to one conversation, the association is stored as a Foreign Key of the conversation in the message table.
 
 - 1-m UserConversations
 - 1-m Messages
 
 ### Messages
 
+A message can only belong to a single user and conversation and optionally a listing. The associations are stored with the Foreign Key of the relevant record's ID in this table.
+
 - 1-1 Users
 - 1-1 Listings (optional)
 - 1-1 Conversations
 
 ### Listings
+
+A listing can only belong to a single category and user and can only have one attachment and measurement.
+The associations for categories, users and measurements are stored as the Foreign Key of the relevant record's ID in this table.
+The association with attachments are stored with a join table to allow for polymorphic associations.
 
 - 1-1 Categories
 - 1-1 Users
@@ -341,8 +361,18 @@ If a Category does not have a Parent then it forms the root node for its own tre
 
 ### Categories
 
+A category can have many listings and only one attachment.
+The associations with listings are stored as a Foreign key of the category ID in the listings table.
+The association with attachments are stored with a join table to allow for polymorphic associations.
+
 - 1-m Listings
 - 1-1 ActiveStorageAttachments
+
+### Measurements
+
+A measurement can belong to many listings. The association is stored as the foreign key of the measurement ID in the listings table.
+
+- 1-m Listings
 
 ### ActiveStorageAttachments
 
@@ -356,9 +386,7 @@ Acts as a polymorphic join table between ActiveStorageBlobs and Listings or Cate
 - UserRoles
 - UserConversations
   
-### Measurements
 
-- 1-m Listings
 
 
 ## R19 - Provide database schema design
@@ -553,15 +581,18 @@ end
 
 ## R20 - Describe the way tasks are allocated and tracked in the project
 
-Github projects was used to manage tasks in the project as it directly integrates with the Github repository while still providing ability to use kanban boards if wanted.
+Github projects was used to manage tasks (including allocation and tracking) in the project as it directly integrates with the Github repository while still providing ability to use kanban boards if wanted.
 
 - [ ] Tasks are created in the project, and are converted into issues for the repository.
   - [ ] Larger tasks are then broken down into smaller tasks which are then have their own issues raised in the repository.
-    - [x] This is repeated until the tasks are small and easily defined.
+    - [ ] This is repeated until the tasks are small and easily defined.
     - [x] The sub tasks are tracked in the parent issue using markdown checkboxes and a link to the child tasks.
-    - [ ] #13
-  - [ ] Github handles all of the links and updating of checkboxes in house.
+  - [ ] Github handles all of the links and updating of checkboxes in house. For example - [ ] #1 would be converted into:
+  - [ ] [<svg style="fill:green" title="Open" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path><path fill-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"></path></svg> #1 Trader Stories ](https://github.com/Samworth27/T2A2/issues/1)
+  - [ ] while a closed issue would look like:
+  - [x] [<svg style="fill:purple" title="Open" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path><path fill-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"></path></svg> #1 Make Offers ](https://github.com/Samworth27/T2A2/issues/5)
 
+Tasks are allocated by assigning a Github member to a task. For this project I was the only person so all tasks were allocated to myself regardless of the status on the project application.
 
 
 [Application Project](https://github.com/users/Samworth27/projects/3/views/1)
